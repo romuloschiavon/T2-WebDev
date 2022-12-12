@@ -28,7 +28,7 @@ No momento estou utilizando o Insomnia para testes nas seguintes rotas
 
 ---
 
-## Progresso
+## Progresso Backend
 - [x] Rota de criar usuários
 - [x] Rota de autenticar usuários (COM JWT)
 - [x] Rota que adiciona fechaduras
@@ -38,3 +38,11 @@ No momento estou utilizando o Insomnia para testes nas seguintes rotas
 - [ ] Rota que remove usuários
 - [ ] Rota que remove fechaduras e todas as suas referencias
 - [ ] Rota que remove relação usuario fechadura dependendo do tempo
+
+## Progresso Frontend
+- [ ] ??????
+- [ ] ??????
+- [ ] ??????
+- [ ] ??????
+- [ ] ??????
+- [ ] ??????
