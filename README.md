@@ -12,8 +12,9 @@ Além disso, é possível utilizar o script abaixo para rodar o servidor com o n
 npm start
 ```
 
+---
 
-### Rotas
+## Rotas
 
 No momento estou utilizando o Insomnia para testes nas seguintes rotas
 - http://localhost:3000/users/register              -> Para registrar usuários
@@ -21,6 +22,19 @@ No momento estou utilizando o Insomnia para testes nas seguintes rotas
 - http://localhost:3000/locks/create                -> Para criar fechaduras
 - http://localhost:3000/usersLocks/updateLock       -> Para reservar um horário da Lock
 
-
-### Diagrama do Projeto
+---
+## Diagrama
 ![diagrama](https://github.com/romuloschiavon/T2-WebDev/blob/master/Diagrama.jpg?raw=true)
+
+---
+
+## Progresso
+- [x] Rota de criar usuários
+- [x] Rota de autenticar usuários (COM JWT)
+- [x] Rota que adiciona fechaduras
+- [x] Rota que relaciona fechadura ao usuário por meio do tempo
+- [x] Middleware para verificar token JWT
+- [ ] Rota de abrir/fechar fechaduras websocket
+- [ ] Rota que remove usuários
+- [ ] Rota que remove fechaduras e todas as suas referencias
+- [ ] Rota que remove relação usuario fechadura dependendo do tempo
