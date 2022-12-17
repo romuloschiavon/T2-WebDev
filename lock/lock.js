@@ -51,10 +51,14 @@ rws.addEventListener('message', (message) => {
     if (rsp.type == 'open') {
         console.log('Abrindo a fechadura...');
         is_locked = false;
+        rws.send(JSON.stringify({ type: 'status', data: { status: is_locked, id_sala:id_sala } }));
+
     }
     if (rsp.type == 'close') {
         console.log('Fechando a fechadura...');
         is_locked = true;
+        rws.send(JSON.stringify({ type: 'status', data: { status: is_locked, id_sala:id_sala } }));
+
     }
     if(rsp.type == 'status'){
         console.log('Status da fechadura: ' + is_locked);
