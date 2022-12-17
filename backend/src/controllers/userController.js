@@ -13,11 +13,11 @@ const register = async (req, res) => {
 	// Extract the user email and password from the request body
 	const { email, password, confirm_password } = req.body;
 
-	const userExists = await User.findOne({email: email})
-	if(userExists){
-		return res.status(400).json({message: "Email already in use"})
+	const userExists = await User.findOne({ email: email });
+	if (userExists) {
+		return res.status(400).json({ message: "Email already in use" });
 	}
-	
+
 	try {
 		// Check for the password confirmation
 		if (!password || !confirm_password) {
@@ -25,7 +25,7 @@ const register = async (req, res) => {
 		} else if (password !== confirm_password) {
 			return res.status(422).json({ message: "Bad authentication" });
 		}
-		
+
 		// Encrypt the password
 		const passHash = await bcrypt.hash(password, 10);
 
@@ -33,10 +33,13 @@ const register = async (req, res) => {
 		const user = new User({ email: email, password: passHash });
 		// Save the user to the database
 		await user.save();
+		const admin = user.admin;
 
 		// Generate a JSON Web Token that contains the user's email
 		const secret = process.env.SECRET;
-		const token = jwt.sign({ email }, secret, { expiresIn: "86400s" });
+		const token = jwt.sign({ email, admin }, secret, {
+			expiresIn: "86400s",
+		});
 
 		// Send a success response with the JWT
 		return res.status(201).json({ token });
@@ -68,16 +71,58 @@ const login = async (req, res) => {
 			return res.status(401).json({ message: "Invalid credentials" });
 		}
 
-		// Generate a JSON Web Token that contains the user's ID
+		// Generate a JSON Web Token that contains the user's ID and ADMIN status
+		const admin = user.admin;
 		const secret = process.env.SECRET;
-		const token = jwt.sign({ email }, secret, { expiresIn: "86400s" });
+		const token = jwt.sign({ email, admin }, secret, {
+			expiresIn: "86400s",
+		});
 
 		// Send a success response with the JWT
-		return res.status(200).setHeader("Authorization", token).json({ token });
+		return res
+			.status(200)
+			.setHeader("Authorization", token)
+			.json({ token });
 	} catch (error) {
 		// If there was an error, send a failure response
 		return res.status(500).json({ message: error.message });
 	}
 };
 
-module.exports = { register, login };
+const dashboard = async (req, res) => {
+	const email = req.email;
+
+	try {
+		const user = await User.findOne({ email: email });
+
+		res.json(user.lockHistory);
+	} catch (error) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+const getAllUsersForLock = async (req, res) => {
+	if (req.admin) {
+		const { lockName } = req.body;
+
+		if (!lockName) {
+			return res.status(402).json({ message: "Bad Request" });
+		}
+
+		try {
+			const users = await User.find({
+				"lockHistory.lockName": lockName,
+			}).select("email");
+			if (!users) {
+				return res.status(404).json({ message: "No users found" });
+			}
+			return res.status(200).json(users);
+		} catch (error) {
+			return res.status(500).json({ message: message.error });
+		}
+	} else {
+		return res.status(401).json({ message: "Unauthorized" });
+	}
+};
+
+module.exports = { register, login, dashboard, getAllUsersForLock };
