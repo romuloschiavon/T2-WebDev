@@ -42,7 +42,7 @@ rws.addEventListener('message', (message) => {
     // Quando recebe uma mensagem do servidor, verifica se foi autorizado ou não
     //console.log(message);
     const rsp = JSON.parse(message.data);
-    console.log('Mensagem recebida do servidor: ' + rsp);
+    console.log('Mensagem recebida do servidor: ' + rsp.type);
     if (rsp.type == 'login') {
         const data = rsp.data;
         handleLogin(data);
