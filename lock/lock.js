@@ -28,7 +28,7 @@ function tryConnection() {
     }
 }
 
-function handleLogin(data){
+function handleLogin(data) {
     if (data.autorizado) {
         console.log('Login realizado com sucesso!');
     } else {
@@ -40,40 +40,45 @@ function handleLogin(data){
 }
 
 function start() {
-    ws.on('open', () => {
-        console.log("Conectado ao servidor");
-        // Quando a conexão é estabelecida, envia os parâmetros id_sala e senha_sala para o servidor
-        ws.send(JSON.stringify({ type: 'login', data: { id_sala: id_sala, senha_sala: senha_sala } }));
+    try {
+        ws.on('open', () => {
+            console.log("Conectado ao servidor");
+            // Quando a conexão é estabelecida, envia os parâmetros id_sala e senha_sala para o servidor
+            ws.send(JSON.stringify({ type: 'login', data: { id_sala: id_sala, senha_sala: senha_sala } }));
 
-        ws.on('message', (message) => {
-            // Quando recebe uma mensagem do servidor, verifica se foi autorizado ou não
-            const rsp = JSON.parse(message);
-            if (rsp.type == 'login') {
-                const data = rsp.data;
-                handleLogin(data);
-            }
-            
-            if (rsp.type == 'open') {
-                console.log('Abrindo a fechadura...');
-                is_open = true;
-            }
-            if (rsp.type == 'close') {
-                console.log('Fechando a fechadura...');
-                is_open = false;
-            }
+            ws.on('message', (message) => {
+                // Quando recebe uma mensagem do servidor, verifica se foi autorizado ou não
+                const rsp = JSON.parse(message);
+                if (rsp.type == 'login') {
+                    const data = rsp.data;
+                    handleLogin(data);
+                }
 
+                if (rsp.type == 'open') {
+                    console.log('Abrindo a fechadura...');
+                    is_open = true;
+                }
+                if (rsp.type == 'close') {
+                    console.log('Fechando a fechadura...');
+                    is_open = false;
+                }
+
+            });
         });
-    });
 
 
-    ws.on('error', (error) => {
-        console.log('Erro na conexão com o servidor. Tentando novamente em 10 segundos...');
+        ws.on('error', (error) => {
+            console.log('Erro na conexão com o servidor. Tentando novamente em 10 segundos...');
+            setTimeout(tryConnection, 10000);
+        });
+        ws.on('close', () => {
+            console.log('Conexão fechada. Tentando novamente em 10 segundos...');
+            setTimeout(tryConnection, 10000);
+        });
+    } catch (e) {
+        console.log("Erro na conexão com o servidor. Tentando novamente em 10 segundos...");
         setTimeout(tryConnection, 10000);
-    });
-    ws.on('close', () => {
-        console.log('Conexão fechada. Tentando novamente em 10 segundos...');
-        setTimeout(tryConnection, 10000);
-    });
+    }
 
 }
 tryConnection();
