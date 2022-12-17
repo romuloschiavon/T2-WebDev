@@ -29,6 +29,22 @@ setInterval(() => {
     }
 }, 10000); // run the check every 10000 milliseconds (10 seconds)
 
+async function handleAskLockTo(status, id_sala){
+    if(status !== 'open' && status !== 'close'){
+        return;
+    }
+    for(let i = 0; i < activeWebSockets.length; i++){
+        const ws = activeWebSockets[i][0];
+        if(activeWebSockets[i][1] === id_sala){
+            ws.send(JSON.stringify({
+                type: status,
+                data: {}
+            }));
+            break;
+        }
+    }
+}
+
 async function handleWSStatus(ws, data) {
     console.log("Status: " + data.id_sala + " " + data.status);
 
@@ -91,4 +107,4 @@ async function handleWSLogin(ws, data) {
 
 }
 
-module.exports = { handleWSLogin, handleWSStatus };
+module.exports = { handleWSLogin, handleWSStatus, handleAskLockTo };
