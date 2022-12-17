@@ -36,13 +36,14 @@ const addToLockHistory = async (req, res) => {
 		const existingLockHistory = await User.findOne({
 			lockHistory: {
 				$elemMatch: {
+					lockName: lockName,
 					start_time: { $gte: newStartTime, $lte: newEndTime },
 					end_time: { $gte: newStartTime, $lte: newEndTime },
 				},
 			},
 		});
 		if(existingLockHistory){
-			return res.status(402).send({ message: "You already have permission for this lock in this timeframe" });
+			return res.status(402).send({ message: "You already have permission for a lock in this timeframe" });
 		}
 
 		const userExists = await User.findOne({ email: req.email });
