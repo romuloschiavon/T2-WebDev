@@ -4,6 +4,7 @@ const http = require("http");
 const ws = require("ws");
 const routes = require("./routes");
 const bodyParser = require("body-parser"); //BodyParser for JWT Authentication
+const webSocketController = require("./controllers/webSocketController");
 
 const app = express();
 
@@ -36,7 +37,8 @@ wss.on("connection", (ws) => {
 
 		switch(msg.type) {
 			case 'login':
-				
+				webSocketController.handleWSLogin(ws, msg.data);
+				break;
 		}
 
 	});

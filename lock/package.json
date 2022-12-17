@@ -22,6 +22,7 @@
   "homepage": "https://github.com/fabiorochaufsc/programacaoWEB#readme",
   "dependencies": {
     "nodemon": "^2.0.20",
+    "reconnecting-websocket": "^4.4.0",
     "ws": "^8.11.0"
   }
 }
