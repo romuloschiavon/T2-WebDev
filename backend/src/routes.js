@@ -3,6 +3,7 @@ const express = require("express"); // Import express
 const userController = require("./controllers/userController.js"); // Import the user controller functions
 const lockController = require("./controllers/lockController.js"); // Import the lock controller functions
 const luController = require("./controllers/LUController.js"); // Import the lock user relationship controller functions
+const webSocketController = require("./controllers/webSocketController"); // Import the webSocket controller
 
 // Utilize express router
 const router = express.Router();
@@ -24,6 +25,10 @@ router.get("/getLockUsers", auth.verify, userController.getAllUsersFromLock);
 
 // Create a route for creating locks
 router.post("/locks/create", auth.verify, lockController.create);
+
+// Open or close Lock
+router.post("/locks/lockControl", auth.verify, lockController.lockControl, webSocketController.handleAskLockTo);
+
 
 // Create a route to correlate users and locks
 router.post(

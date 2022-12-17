@@ -1,6 +1,5 @@
 const Lock = require("../models/Lock"); // Import the User model
 const bcrypt = require("bcryptjs"); // Import the bcrypt library
-
 const dotenv = require("dotenv"); // Import the dotenv library
 
 dotenv.config({
@@ -49,4 +48,24 @@ const create = async (req, res) => {
 	}
 };
 
-module.exports = { create };
+const lockControl = async (req, res, next) => {
+	const { lockName, status } = req.body;
+
+	try {
+		const lockExists = await Lock.findOne({ name: lockName });
+		if (lockExists) {
+			if(lockExists.isLocked === status){
+				return res.status(402).json({ message: "Lock is already in " + status + " status"})
+			}else{
+				req.status = status
+				req.lockName = lockName
+				return next()
+			}
+		}
+	} catch (error) {
+		return res.status(500).json({ message: message.error })
+	}
+	
+}
+
+module.exports = { create, lockControl};
