@@ -101,7 +101,7 @@ const dashboard = async (req, res) => {
 	}
 };
 
-const getAllUsersForLock = async (req, res) => {
+const getAllUsersFromLock = async (req, res) => {
 	if (req.admin) {
 		const { lockName } = req.body;
 
@@ -110,9 +110,17 @@ const getAllUsersForLock = async (req, res) => {
 		}
 
 		try {
-			const users = await User.find({
-				"lockHistory.lockName": lockName,
-			}).select("email");
+			const users = await User.find({}).select({
+				email: 1,
+				lockHistory: {
+				  $elemMatch: {
+					lockName: lockName,
+				  },
+				},
+			  });
+			// const users = await User.find({
+			// 	"lockHistory.lockName": lockName,
+			// }).select("email lockHistory.lockName lockHistory.start_time lockHistory.end_time");
 			if (!users) {
 				return res.status(404).json({ message: "No users found" });
 			}
@@ -125,4 +133,4 @@ const getAllUsersForLock = async (req, res) => {
 	}
 };
 
-module.exports = { register, login, dashboard, getAllUsersForLock };
+module.exports = { register, login, dashboard, getAllUsersFromLock };
