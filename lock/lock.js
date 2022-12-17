@@ -28,6 +28,17 @@ function tryConnection() {
     }
 }
 
+function handleLogin(data){
+    if (data.autorizado) {
+        console.log('Login realizado com sucesso!');
+    } else {
+        console.log('Falha no login. Verifique o id da sala e a senha.');
+        // Fecha a conexão
+        ws.close();
+        process.exit(1);
+    }
+}
+
 function start() {
     ws.on('open', () => {
         console.log("Conectado ao servidor");
@@ -39,35 +50,22 @@ function start() {
             const rsp = JSON.parse(message);
             if (rsp.type == 'login') {
                 const data = rsp.data;
-                if (data.autorizado) {
-                    console.log('Login realizado com sucesso!');
-                    // Aguarda novas mensagens para abrir ou fechar a fechadura
-                    ws.on('message', (message) => {
-                        const data = JSON.parse(message);
-                        if (data.acao === 'abrir') {
-                            console.log('Abrindo a fechadura...');
-                        } else if (data.acao === 'fechar') {
-                            console.log('Fechando a fechadura...');
-                        }
-                    });
-                } else {
-                    console.log('Falha no login. Verifique o id da sala e a senha.');
-                    // Fecha a conexão
-                    ws.close();
-                    process.exit(1);
-                }
+                handleLogin(data);
             }
+            
             if (rsp.type == 'open') {
                 console.log('Abrindo a fechadura...');
+                is_open = true;
             }
             if (rsp.type == 'close') {
                 console.log('Fechando a fechadura...');
+                is_open = false;
             }
-    
+
         });
     });
 
-    
+
     ws.on('error', (error) => {
         console.log('Erro na conexão com o servidor. Tentando novamente em 10 segundos...');
         setTimeout(tryConnection, 10000);
