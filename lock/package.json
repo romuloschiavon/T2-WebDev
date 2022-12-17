@@ -1,0 +1,27 @@
+{
+  "name": "lock",
+  "version": "1.0.0",
+  "description": "um script para simular uma fechadura com conexão de websocket com nosso servidor",
+  "main": "lock.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon lock.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabiorochaufsc/programacaoWEB.git"
+  },
+  "keywords": [
+    "websocket"
+  ],
+  "author": "Manuella Rockembach; Rodrigo ferraz; Romulo Schiavon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabiorochaufsc/programacaoWEB/issues"
+  },
+  "homepage": "https://github.com/fabiorochaufsc/programacaoWEB#readme",
+  "dependencies": {
+    "nodemon": "^2.0.20",
+    "ws": "^8.11.0"
+  }
+}
