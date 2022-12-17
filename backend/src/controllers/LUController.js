@@ -12,13 +12,17 @@ function convertTime(time) {
 
 const addToLockHistory = async (req, res) => {
 	// Requires email, lock name, start time and end time for the lock use
-	const { lockName, lockPassword, start_time, end_time } = req.body;
+	const { email, lockName, lockPassword, start_time, end_time } = req.body;
 
 	try {
 		// Check for lock existance in database
 		const lockExists = await Lock.findOne({ name: lockName });
 		if (!lockExists) {
 			return res.status(400).json({ message: "Lock does not exists" });
+		}
+		const userExists = await User.findOne({ email: email });
+		if (!userExists){
+			return res.status(400).json({ message: "User does not exists" });
 		}
 
 		// Check if lock password is correct (should be)
@@ -34,6 +38,7 @@ const addToLockHistory = async (req, res) => {
 		const newEndTime = convertTime(end_time);
 
 		const existingLockHistory = await User.findOne({
+			email: email,
 			lockHistory: {
 				$elemMatch: {
 					lockName: lockName,
@@ -43,10 +48,9 @@ const addToLockHistory = async (req, res) => {
 			},
 		});
 		if(existingLockHistory){
-			return res.status(402).send({ message: "You already have permission for a lock in this timeframe" });
+			return res.status(402).send({ message: "There's already users for this lock in this timeframe" });
 		}
 
-		const userExists = await User.findOne({ email: req.email });
 		// Pushes to the array the new Lock
 		userExists.lockHistory.push({
 			lockName: lockName,
