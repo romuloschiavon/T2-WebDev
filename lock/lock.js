@@ -58,16 +58,18 @@ rws.addEventListener('message', (message) => {
     }
     if(rsp.type == 'status'){
         console.log('Status da fechadura: ' + is_open);
-        rws.send(JSON.stringify({ type: 'status', data: { status: is_open } }));
+        rws.send(JSON.stringify({ type: 'status', data: { status: is_open, id_sala:id_sala } }));
     }
 
 });
 
 rws.addEventListener('error', (error) => {
     console.log('Erro na conexão com o servidor. Tentando novamente em 10 segundos...');
+    is_open = false;
     
 });
 rws.addEventListener('close', () => {
     console.log('Conexão fechada. Tentando novamente em 10 segundos...');
+    is_open = false;
     
 });

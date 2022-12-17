@@ -39,6 +39,9 @@ wss.on("connection", (ws) => {
 			case 'login':
 				webSocketController.handleWSLogin(ws, msg.data);
 				break;
+			case 'status':
+				webSocketController.handleWSStatus(ws, msg.data);
+				break;
 		}
 
 	});

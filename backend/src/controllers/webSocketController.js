@@ -19,8 +19,31 @@ setInterval(() => {
             console.log("removendo a sala " + activeWebSockets[i][1] + " da lista de salas ativas");
             activeWebSockets.splice(i, 1);
         }
+        else{
+            // pede o status da porta e atualiza no banco de dados
+            ws.send(JSON.stringify({
+                type: 'status',
+                data: {}
+            }));
+        }
     }
 }, 10000); // run the check every 10000 milliseconds (10 seconds)
+
+async function handleWSStatus(ws, data) {
+    console.log("Status: " + data.id_sala + " " + data.status);
+
+    // verifica se a sala existe
+    const lock = await Lock.findOne({
+        name: data.id_sala
+    });
+    // console.log("lock: " + lock);
+    if (lock) {
+        // atualiza o status da porta no banco de dados
+        lock.isLocked = data.status;
+        lock.save();
+    }
+
+}
 
 async function handleWSLogin(ws, data) {
     console.log("Login: " + data.id_sala + " " + data.senha_sala);
@@ -68,4 +91,4 @@ async function handleWSLogin(ws, data) {
 
 }
 
-module.exports = { handleWSLogin };
+module.exports = { handleWSLogin, handleWSStatus };
