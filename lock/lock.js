@@ -8,7 +8,7 @@ if (process.argv.length != 4) {
 }
 let id_sala = process.argv[2];
 let senha_sala = process.argv[3];
-let is_open = false;
+let is_locked = true;
 console.log("room " + id_sala + " with password " + senha_sala);
 
 // Cria uma nova conexão websocket com o servidor
@@ -50,26 +50,26 @@ rws.addEventListener('message', (message) => {
 
     if (rsp.type == 'open') {
         console.log('Abrindo a fechadura...');
-        is_open = true;
+        is_locked = false;
     }
     if (rsp.type == 'close') {
         console.log('Fechando a fechadura...');
-        is_open = false;
+        is_locked = true;
     }
     if(rsp.type == 'status'){
-        console.log('Status da fechadura: ' + is_open);
-        rws.send(JSON.stringify({ type: 'status', data: { status: is_open, id_sala:id_sala } }));
+        console.log('Status da fechadura: ' + is_locked);
+        rws.send(JSON.stringify({ type: 'status', data: { status: is_locked, id_sala:id_sala } }));
     }
 
 });
 
 rws.addEventListener('error', (error) => {
     console.log('Erro na conexão com o servidor. Tentando novamente em 10 segundos...');
-    is_open = false;
+    is_locked = true;
     
 });
 rws.addEventListener('close', () => {
     console.log('Conexão fechada. Tentando novamente em 10 segundos...');
-    is_open = false;
+    is_locked = true;
     
 });
