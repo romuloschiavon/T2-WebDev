@@ -171,7 +171,7 @@ const removeLock = async (req, res) => {
 				{},
 				{ $pull: { lockHistory: { lockName: lockName } } }
 			);
-
+			webSocketController.removeLockFromActiveList(lockName);
 			return res.status(200).send({ message: "Removed lock" });
 		} catch (error) {
 			// Catches errors

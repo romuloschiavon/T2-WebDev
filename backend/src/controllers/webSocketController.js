@@ -36,6 +36,17 @@ setInterval(() => {
 
 
 module.exports = {
+    async removeLockFromActiveList(lockName) {
+        // fecha a conexão websockt e remove da lista de salas ativas
+        for (let i = 0; i < activeWebSockets.length; i++) {
+            if (activeWebSockets[i][1] == lockName) {
+                console.log("removendo a sala " + lockName + " da lista de salas ativas");
+                activeWebSockets[i][0].close();
+                activeWebSockets.splice(i, 1);
+                return;
+            }
+        }
+    },
     async updateActiveLockName(oldLockName, newLockName) {
         for (let i = 0; i < activeWebSockets.length; i++) {
             if (activeWebSockets[i][1] == oldLockName) {

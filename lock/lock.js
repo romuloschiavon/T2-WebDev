@@ -73,7 +73,7 @@ rws.addEventListener('error', (error) => {
     
 });
 rws.addEventListener('close', () => {
-    console.log('Conexão fechada. Tentando novamente em 10 segundos...');
-    is_locked = true;
+    console.log("conexão com o servidor fechada pelo servidor. Encerrando o programa...");
+    process.exit(1);
     
 });

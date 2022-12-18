@@ -30,7 +30,7 @@ router.post("/locks/create", auth.verify, lockController.createLock);
 router.post("/locks/update", auth.verify, luController.changeLockName);
 
 // Remove Lock and dependencies
-router.post("locks/remove", auth.verify, luController.removeLock);
+router.post("/locks/remove", auth.verify, luController.removeLock);
 
 // Open or close Lock
 router.post(
