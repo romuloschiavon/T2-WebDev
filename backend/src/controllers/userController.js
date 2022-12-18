@@ -128,7 +128,7 @@ const dashboard = async (req, res) => {
 
 const getAllUsersFromLock = async (req, res) => {
 	if (req.admin) {
-		const { lockName } = req.body;
+		const lockName  = req.headers.lockname;
 
 		if (!lockName) {
 			return res
