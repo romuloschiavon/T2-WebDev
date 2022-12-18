@@ -15,7 +15,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .img-container {
   width: 300px;
@@ -24,5 +23,9 @@ export default {
 .img-logo-ufsc {
   width: 100%;
   height: auto;
+}
+body{
+  padding: 0;
+  margin: 0;
 }
 </style>

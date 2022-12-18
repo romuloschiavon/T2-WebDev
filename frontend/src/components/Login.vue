@@ -1,6 +1,6 @@
 <template>
   <div class="img-container">
-    <img alt="UFSC logo" src="../assets/logo.png" class="img-logo-ufsc"/>
+    <img alt="UFSC logo" src="../assets/logo.png" class="img-logo-ufsc" />
   </div>
   <h1>Login</h1>
   <div class="login-form">
@@ -16,7 +16,8 @@
 
 <script>
 import axios from 'axios'
-import  api_url  from '../config'
+import api_url from '../config'
+
 export default {
   name: 'LoginForm',
   data() {
@@ -37,14 +38,22 @@ export default {
         email: this.email,
         password: this.password
       })
-      .then(response => {
-        // If the login was successful, store the user's token and redirect to the dashboard
-        localStorage.setItem('token', JSON.stringify(response.data.token));
-        this.$router.push('/home');
-      })
-      .catch(error => {
-        console.error(error);
-      });
+        .then(response => {
+          if (response.status === 200) {
+            // User was successfully authenticated
+            localStorage.setItem('token', JSON.stringify(response.data.token))
+            this.$router.push('/home') // redirect to home page
+          }
+        })
+        .catch(error => {
+          if (error.response.status === 401) {
+            // Unauthorized, display error message
+            this.errorMessage = 'Invalid credentials'
+          } else {
+            // Display error message
+            this.errorMessage = 'Something went wrong'
+          }
+        });
     },
     signup() {
       // Redirect to the sign up page
@@ -77,24 +86,24 @@ label {
 }
 
 input {
-    width: 300px;
-    height: 40px;
-    padding-left: 20px;
-    display: block;
-    margin-bottom: 30px;
-    margin-right: auto;
-    margin-left: auto;
-    border: 1px solid skyblue;
-  }
-  
-  button {
-    width: 320px;
-    height: 40px;
-    border: 1px solid skyblue;
-    background: skyblue;
-    color: white;
-    cursor: pointer;
-    margin: 5px;
-  }
+  width: 300px;
+  height: 40px;
+  padding-left: 20px;
+  display: block;
+  margin-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid skyblue;
+}
+
+button {
+  width: 320px;
+  height: 40px;
+  border: 1px solid skyblue;
+  background: skyblue;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+}
 </style>
 

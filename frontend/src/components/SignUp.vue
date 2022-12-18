@@ -20,7 +20,7 @@
   
 <script>
 import axios from 'axios'
-import api_url  from '../config'
+import api_url from '../config'
 
 export default {
     name: 'SignUp',
@@ -38,7 +38,7 @@ export default {
                 console.error('Email and password are required');
                 return;
             }
-            await axios.post(api_url + '/users/login', {
+            await axios.post(api_url + '/users/register', {
                 name: this.name,
                 email: this.email,
                 password: this.password
