@@ -16,15 +16,11 @@ npm start
 
 ## Rotas
 
-No momento estou utilizando o Insomnia para testes nas seguintes rotas
-- http://localhost:3000/users/register              -> Para registrar usuários
-- http://localhost:3000/users/login                 -> Para logar
-- http://localhost:3000/locks/create                -> Para criar fechaduras
-- http://localhost:3000/usersLocks/updateLock       -> Para reservar um horário da Lock
+É possível checar todas as suas rotas e suas funcionalidades no arquivo routes.js
 
 ---
 ## Diagrama
-![diagrama](https://github.com/romuloschiavon/T2-WebDev/blob/master/Diagrama.jpg?raw=true)
+![diagrama](https://github.com/romuloschiavon/T2-WebDev/blob/master/backend/Diagrama.jpg?raw=true)
 
 ---
 
@@ -34,10 +30,10 @@ No momento estou utilizando o Insomnia para testes nas seguintes rotas
 - [x] Rota que adiciona fechaduras
 - [x] Rota que relaciona fechadura ao usuário por meio do tempo
 - [x] Middleware para verificar token JWT
-- [ ] Rota de abrir/fechar fechaduras websocket
-- [ ] Rota que remove usuários
-- [ ] Rota que remove fechaduras e todas as suas referencias
-- [ ] Rota que remove relação usuario fechadura dependendo do tempo
+- [x] Rota de abrir/fechar fechaduras websocket
+- [x] Rota que remove usuários
+- [x] Rota que remove fechaduras e todas as suas referencias
+- [x] Rota que remove relação usuario fechadura dependendo do tempo
 
 ## Progresso Frontend
 - [ ] ??????

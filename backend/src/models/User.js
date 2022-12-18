@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema(
 			required: true,
 		},
 		lockHistory: [lockHistorySchema],
+		admin: {
+			type: Boolean,
+			default: false
+		}
 	},
 	{
 		// Make the lockHistory field optional
