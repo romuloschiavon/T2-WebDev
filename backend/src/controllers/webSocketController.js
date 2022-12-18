@@ -46,6 +46,7 @@ module.exports = {
                 return;
             }
         }
+        return
     },
     async updateActiveLockName(oldLockName, newLockName) {
         for (let i = 0; i < activeWebSockets.length; i++) {
