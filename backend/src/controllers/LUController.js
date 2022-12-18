@@ -2,6 +2,7 @@ const Lock = require("../models/Lock");
 const User = require("../models/User");
 const moment = require("moment");
 const bcrypt = require("bcryptjs");
+const webSocketController = require("./webSocketController");
 
 function convertTime(time) {
 	const newTime = new Date(
@@ -138,7 +139,7 @@ const changeLockName = async (req, res) => {
 				{ "lockHistory.lockName": oldLockName },
 				{ $set: { "lockHistory.$.lockName": newLockName } }
 			);
-
+			webSocketController.updateActiveLockName(oldLockName, newLockName);
 			return res.status(200).send({ message: "Changed lock name" });
 		} catch (error) {
 			// Catches errors
