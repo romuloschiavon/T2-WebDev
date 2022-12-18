@@ -27,7 +27,6 @@ const server = http.createServer(app);
 // Create a WebSocket server on the HTTP
 const wss = new ws.Server({ server });
 
-
 // When a client connects, log a message
 wss.on("connection", (ws) => {
 	console.log("Client connected");
@@ -35,15 +34,14 @@ wss.on("connection", (ws) => {
 		let msg = JSON.parse(message);
 		console.log(msg);
 
-		switch(msg.type) {
-			case 'login':
+		switch (msg.type) {
+			case "login":
 				webSocketController.handleWSLogin(ws, msg.data);
 				break;
-			case 'status':
+			case "status":
 				webSocketController.handleWSStatus(ws, msg.data);
 				break;
 		}
-
 	});
 });
 
