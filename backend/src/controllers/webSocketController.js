@@ -40,6 +40,7 @@ async function handleAskLockTo(req, res) {
 	if (status !== "open" && status !== "close") {
 		return res.status(402).json({ message: "Bad Request" });
 	}
+    console.log(activeWebSockets.length);
 	for (let i = 0; i < activeWebSockets.length; i++) {
 		const ws = activeWebSockets[i][0];
 		if (activeWebSockets[i][1] === id_sala) {
@@ -56,6 +57,7 @@ async function handleAskLockTo(req, res) {
 			}
 		}
 	}
+    return res.status(404).json({ message: "Lock not found on active locks list!" });
 }
 
 async function handleWSStatus(ws, data) {
