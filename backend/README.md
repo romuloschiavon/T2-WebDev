@@ -24,7 +24,7 @@ No momento estou utilizando o Insomnia para testes nas seguintes rotas
 
 ---
 ## Diagrama
-![diagrama](https://github.com/romuloschiavon/T2-WebDev/blob/master/Diagrama.jpg?raw=true)
+![diagrama](https://github.com/romuloschiavon/T2-WebDev/blob/master/backend/Diagrama.jpg?raw=true)
 
 ---
 
@@ -34,10 +34,10 @@ No momento estou utilizando o Insomnia para testes nas seguintes rotas
 - [x] Rota que adiciona fechaduras
 - [x] Rota que relaciona fechadura ao usuário por meio do tempo
 - [x] Middleware para verificar token JWT
-- [ ] Rota de abrir/fechar fechaduras websocket
+- [x] Rota de abrir/fechar fechaduras websocket
 - [ ] Rota que remove usuários
 - [ ] Rota que remove fechaduras e todas as suas referencias
-- [ ] Rota que remove relação usuario fechadura dependendo do tempo
+- [x] Rota que remove relação usuario fechadura dependendo do tempo
 
 ## Progresso Frontend
 - [ ] ??????
