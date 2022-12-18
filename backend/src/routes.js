@@ -21,7 +21,7 @@ router.post("/users/login", userController.login);
 router.get("/dashboard", auth.verify, userController.dashboard);
 
 // Get all Locks 
-router.get("/getLockUsers", auth.verify, userController.getAllUsersFromLock);
+router.get("/locks/getLockUsers", auth.verify, userController.getAllUsersFromLock);
 
 // Create a route for creating locks
 router.post("/locks/create", auth.verify, lockController.create);
