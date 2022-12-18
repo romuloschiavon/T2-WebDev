@@ -1,7 +1,6 @@
 const express = require("express"); // Import express
 
 const userController = require("./controllers/userController.js"); // Import the user controller functions
-const lockController = require("./controllers/lockController.js"); // Import the lock controller functions
 const luController = require("./controllers/LUController.js"); // Import the lock user relationship controller functions
 const webSocketController = require("./controllers/webSocketController"); // Import the webSocket controller
 
@@ -21,10 +20,13 @@ router.post("/users/login", userController.login);
 router.get("/dashboard", auth.verify, userController.dashboard);
 
 // Create a route for creating locks
-router.post("/locks/create", auth.verify, lockController.createLock);
+router.post("/locks/create", auth.verify, luController.createLock);
 
 // Update the lock name
-router.post("/locks/update", auth.verify, luController.changeLockName);
+router.post("/locks/updateName", auth.verify, luController.changeLockName);
+
+// Update the lock password
+router.post("/locks/updatePassword", auth.verify, luController.changeLockPassword);
 
 // Remove Lock and dependencies
 router.post("/locks/remove", auth.verify, luController.removeLock);
@@ -33,7 +35,7 @@ router.post("/locks/remove", auth.verify, luController.removeLock);
 router.post(
 	"/locks/lockControl",
 	auth.verify,
-	lockController.lockControl,
+	luController.lockControl,
 	webSocketController.handleAskLockTo
 );
 
