@@ -1,5 +1,5 @@
 const Lock = require("../models/Lock");
-const lockController = require("./lockController");
+const luController = require("./LUController.js");
 const WebSocket = require("ws");
 
 const bcrypt = require("bcryptjs"); // Import the bcrypt library

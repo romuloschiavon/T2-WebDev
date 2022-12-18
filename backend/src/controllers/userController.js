@@ -1,6 +1,7 @@
 const User = require("../models/User"); // Import the User model
 const jwt = require("jsonwebtoken"); // Import the jsonwebtoken library
 const bcrypt = require("bcryptjs"); // Import the bcrypt library
+const moment = require("moment"); // Import the moment libraby for time conversion
 
 const dotenv = require("dotenv"); // Import the dotenv library
 
@@ -95,7 +96,26 @@ const dashboard = async (req, res) => {
 	try {
 		const user = await User.findOne({ email: email });
 
-		res.json(user.lockHistory);
+		const groupedLocks = user.lockHistory.reduce((acc, curr) => {
+			const lockName = curr.lockName;
+			if (!acc[lockName]) {
+				acc[lockName] = [];
+			}
+			acc[lockName].push({
+				start_time: curr.start_time,
+				end_time: curr.end_time,
+			});
+			return acc;
+		}, {});
+
+		const groupedLocksArray = Object.entries(groupedLocks).map(
+			([lockName, timeFrames]) => ({
+				lockName,
+				time_frames: timeFrames,
+			})
+		);
+
+		return res.status(200).json(groupedLocksArray);
 	} catch (error) {
 		return res.status(500).json({ message: error.message });
 	}
@@ -106,11 +126,15 @@ const getAllUsersFromLock = async (req, res) => {
 		const { lockName } = req.body;
 
 		if (!lockName) {
-			return res.status(402).json({ message: "Bad Request: No lock name found on body" });
+			return res
+				.status(402)
+				.json({ message: "Bad Request: No lock name found on body" });
 		}
 
 		try {
-			const users = await User.find({}).select({
+			const users = await User.find({
+				lockHistory: { $exists: true, $not: { $size: 0 } },
+			}).select({
 				email: 1,
 				lockHistory: {
 					$elemMatch: {
@@ -126,7 +150,7 @@ const getAllUsersFromLock = async (req, res) => {
 			}
 			return res.status(200).json(users);
 		} catch (error) {
-			return res.status(500).json({ message: message.error });
+			return res.status(500).json({ message: error.message });
 		}
 	} else {
 		return res.status(401).json({ message: "Unauthorized" });

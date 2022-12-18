@@ -61,7 +61,7 @@ rws.addEventListener('message', (message) => {
 
     }
     if(rsp.type == 'status'){
-        console.log('Status da fechadura: ' + is_locked);
+        console.log('Esta fechado: ' + is_locked);
         rws.send(JSON.stringify({ type: 'status', data: { status: is_locked, id_sala:id_sala } }));
     }
 
