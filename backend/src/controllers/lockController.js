@@ -67,6 +67,7 @@ const lockControl = async (req, res, next) => {
 				return next();
 			}
 		}
+		return res.status(404).json({ message: "Lock not found on database" });
 	} catch (error) {
 		return res.status(500).json({ message: message.error });
 	}

@@ -1,0 +1,475 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2022-12-18T13:12:22.353Z",
+    "__export_source": "insomnia.desktop.app:v2022.7.0",
+    "resources": [
+        {
+            "_id": "req_278abf82fd27483eba8e7c706af60d0a",
+            "parentId": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "modified": 1671365786758,
+            "created": 1671365674035,
+            "url": "{{ _.api_url }}/dashboard",
+            "name": "Dashboard",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "id": "pair_c9195801dce941deacd3207015285de3",
+                    "name": "Authorization",
+                    "value": "{{ _.token }}",
+                    "description": ""
+                }
+            ],
+            "authentication": {
+                "type": "apikey",
+                "disabled": true,
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYi5jb20iLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTY3MTM2NDcyOSwiZXhwIjoxNjcxNDUxMTI5fQ.G9HyRiLw3ByapFivkGqjV5dzZ8nmxJXu9EZDiu-9QYs",
+                "addTo": "header"
+            },
+            "metaSortKey": -1671365783919,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "parentId": null,
+            "modified": 1671364397291,
+            "created": 1671364397291,
+            "name": "T2 - Web",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_7e53920660d746c8b6fcce130a758fd9",
+            "parentId": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "modified": 1671365783869,
+            "created": 1671365783869,
+            "url": "",
+            "name": "New Request",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1671365783869,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_4d184e43297d46f28a1006803264cca2",
+            "parentId": "fld_c012732c483f4c3cade14de184ec1e3c",
+            "modified": 1671367931038,
+            "created": 1671365587587,
+            "url": "{{ _.api_url }}/usersLocks/updateLock",
+            "name": "Add User to Lock",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"email\":\"a@b.com\",\n\t\"lockName\": \"SALA 102\", \n\t\"start_time\":\"12?00\", \n\t\"end_time\":\"20:00\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "id": "pair_bdd1dea1b97e4a5189304230bba26d15",
+                    "name": "Authorization",
+                    "value": "{{ _.token }}",
+                    "description": ""
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671365587587,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_c012732c483f4c3cade14de184ec1e3c",
+            "parentId": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "modified": 1671365632180,
+            "created": 1671364485047,
+            "name": "UserLocks",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1671364794908,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_0df28c6dbfa54264adfa4c900d6446c4",
+            "parentId": "fld_c012732c483f4c3cade14de184ec1e3c",
+            "modified": 1671369076940,
+            "created": 1671368221265,
+            "url": "{{ _.api_url }}/usersLocks/removeLock",
+            "name": "Remove User from Lock",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"email\":\"a@b.com\",\n\t\"lockName\": \"SALA 102\", \n\t\"start_time\":\"12?00\", \n\t\"end_time\":\"20:00\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "id": "pair_bdd1dea1b97e4a5189304230bba26d15",
+                    "name": "Authorization",
+                    "value": "{{ _.token }}",
+                    "description": ""
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671365276378,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_51ffdf0b167c4915a1844bede348c424",
+            "parentId": "fld_a24cf5a41e6d4bd38fcbf63e0667f753",
+            "modified": 1671365592115,
+            "created": 1671364634066,
+            "url": "{{ _.api_url }}/users/register",
+            "name": "Register",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"email\":\"a@b.com\",\n\t\"password\":\"hash123\",\n\t\"confirm_password\":\"hash123\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671365587637,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_a24cf5a41e6d4bd38fcbf63e0667f753",
+            "parentId": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "modified": 1671365598825,
+            "created": 1671364462766,
+            "name": "Users",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1671364794858,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_116a4e8bdaa743349d5c0d1402a53321",
+            "parentId": "fld_a24cf5a41e6d4bd38fcbf63e0667f753",
+            "modified": 1671365593767,
+            "created": 1671364486532,
+            "url": "{{ _.api_url }}/users/login",
+            "name": "Login",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"email\":\"romulo@gmail.com\",\n\t\"password\":\"123\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671365587612,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_7454345af7f043d2b33987a6e617774c",
+            "parentId": "fld_b72b34152a4147b3bba5ba4d56841716",
+            "modified": 1671367994829,
+            "created": 1671364965169,
+            "url": "{{ _.api_url }}/locks/getLockUsers",
+            "name": "Get All Door's Users",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"lockName\":\"SALA 102\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "id": "pair_f819ee17259e4712a4136bb8fd0b4d7b",
+                    "name": "Authorization",
+                    "value": "{{ _.token }}",
+                    "description": ""
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_bc81d2972c294d4a8eb5f99d72499233"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671364965169,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_b72b34152a4147b3bba5ba4d56841716",
+            "parentId": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "modified": 1671365603031,
+            "created": 1671364472852,
+            "name": "Locks",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1671364794833,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_13e750c871e24a6fa7016a4078b53179",
+            "parentId": "fld_b72b34152a4147b3bba5ba4d56841716",
+            "modified": 1671365307382,
+            "created": 1671365161761,
+            "url": "{{ _.api_url }}/locks/create",
+            "name": "Create Lock",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\":\"LAB C122\",\n\t\"password\":\"555\",\n\t\"confirm_password\":\"555\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "id": "pair_ce0e7305f2d94cc3b2bdc9a8fbf99b12",
+                    "name": "Authorization",
+                    "value": "{{ _.token }}",
+                    "description": ""
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671364965144,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_2caa778b0eba4591833cae40f956054e",
+            "parentId": "fld_b72b34152a4147b3bba5ba4d56841716",
+            "modified": 1671367175760,
+            "created": 1671366324489,
+            "url": "{{ _.api_url }}/locks/update",
+            "name": "Update Lock",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"oldLockName\":\"LAB AAAAA\",\n\t\"newLockName\":\"LAB AAAAaA\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "id": "pair_ce0e7305f2d94cc3b2bdc9a8fbf99b12",
+                    "name": "Authorization",
+                    "value": "{{ _.token }}",
+                    "description": ""
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671364965131.5,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_240254055e8b4d089cf44150a8825a75",
+            "parentId": "fld_b72b34152a4147b3bba5ba4d56841716",
+            "modified": 1671367417502,
+            "created": 1671366997777,
+            "url": "{{ _.api_url }}/locks/remove",
+            "name": "Remove Lock",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"lockName\":\"LAB C122\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "id": "pair_ce0e7305f2d94cc3b2bdc9a8fbf99b12",
+                    "name": "Authorization",
+                    "value": "{{ _.token }}",
+                    "description": ""
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671364965125.25,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_62902cd673e244a9adc83f0b4f664b14",
+            "parentId": "fld_b72b34152a4147b3bba5ba4d56841716",
+            "modified": 1671365435135,
+            "created": 1671365151678,
+            "url": "{{ _.api_url }}/locks/lockControl",
+            "name": "Open/Close Door",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"lockName\":\"LAB C122\",\n\t\"status\":\"open\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "id": "pair_35a5976532e04785adaff00d2d5bfb95",
+                    "name": "Authorization",
+                    "value": "{{ _.token }}",
+                    "description": ""
+                },
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1671364965119,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_9dc4800e70ce5aba5a2f415eee137ed32d1eef24",
+            "parentId": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "modified": 1671366369221,
+            "created": 1671364397303,
+            "name": "Base Environment",
+            "data": {
+                "api_url": "http://localhost:3000",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvbXVsb0BnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjcxMzY2MzU4LCJleHAiOjE2NzE0NTI3NTh9.3-Zs5XL0mxJ_ttENDQXvk8s2ZFiHw1mdjT_6M1tdbDM"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "api_url",
+                    "token"
+                ]
+            },
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1671364397303,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_9dc4800e70ce5aba5a2f415eee137ed32d1eef24",
+            "parentId": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "modified": 1671364397312,
+            "created": 1671364397312,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "spc_0dcce63c3ff842f9800fb795b287b129",
+            "parentId": "wrk_41765ee345384e29a0561c9d06cc196b",
+            "modified": 1671364397293,
+            "created": 1671364397293,
+            "fileName": "T2 - Web",
+            "contents": "",
+            "contentType": "yaml",
+            "_type": "api_spec"
+        }
+    ]
+}
