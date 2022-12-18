@@ -113,11 +113,11 @@ const getAllUsersFromLock = async (req, res) => {
 			const users = await User.find({}).select({
 				email: 1,
 				lockHistory: {
-				  $elemMatch: {
-					lockName: lockName,
-				  },
+					$elemMatch: {
+						lockName: lockName,
+					},
 				},
-			  });
+			});
 			// const users = await User.find({
 			// 	"lockHistory.lockName": lockName,
 			// }).select("email lockHistory.lockName lockHistory.start_time lockHistory.end_time");
