@@ -1,7 +1,7 @@
 <template>
     <div class="nav">
         <router-link to = "/home">Home</router-link>
-        <router-link to = "/registerlock">Add Lock</router-link>
+        <router-link to = "/managelocks">Manage Locks</router-link>
         <a id="logout" v-on:click="logout" href="#">Logout</a>
     </div>
 </template>

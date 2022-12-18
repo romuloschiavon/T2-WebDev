@@ -41,7 +41,7 @@ export default {
         .then(response => {
           if (response.status === 200) {
             // User was successfully authenticated
-            localStorage.setItem('token', JSON.stringify(response.data.token))
+            localStorage.setItem('token', response.data.token)
             this.$router.push('/home') // redirect to home page
           }
         })
@@ -104,6 +104,10 @@ button {
   color: white;
   cursor: pointer;
   margin: 5px;
+  text-align: center;
+}
+button:active{
+    opacity: 0.8;
 }
 </style>
 

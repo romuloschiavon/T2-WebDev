@@ -46,7 +46,7 @@ export default {
                 // handle success
                 if (response.status === 201) {
                     // User was successfully created
-                    localStorage.setItem('token', JSON.stringify(response.data.token))
+                    localStorage.setItem('token', response.data.token)
                     this.$router.push('/home') // redirect to login page
                 }
             }).catch(error => {
@@ -107,6 +107,10 @@ button {
     background: skyblue;
     color: white;
     cursor: pointer;
+    text-align: center;
+}
+button:active{
+    opacity: 0.8;
 }
 </style>
   
