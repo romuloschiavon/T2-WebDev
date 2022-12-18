@@ -12,10 +12,15 @@
             <td>TO</td>
             <td>{{ Date(lock.end_time).toLocaleString("pt-br") }}</td>
             <td>
-                <button id="open" v-on:click="open">Open</button>
+                <button id="open" v-on:click="open(lock.lockName)">Open</button>
             </td>
             <td>
-                <button id="close" v-on:click="close">Close</button>
+                <button id="close" v-on:click="close(lock.lockName)">Close</button>
+            </td>
+            <td>
+                <template v-if="userIsAdmin">
+                    <button id="edit" v-on:click="edit">Edit</button>
+                </template>
             </td>
         </tr>
     </table>
@@ -36,18 +41,29 @@ export default {
     components: {
         TopHeader
     },
+    created() {
+        // Check if the user is an admin
+        if (localStorage.getItem('admin') === 'true') {
+            this.userIsAdmin = true;
+        }
+        else {
+            this.userIsAdmin = false;
+        }
+    },
     methods: {
-        open() {
+        open(name) {
             // Send a request to the server to open the lock
-            axios.post(api_url + '/locks/lockControl', {
-                lockId: this.locks.lockName
+            axios({
+                method: 'post',
+                url: api_url + '/locks/lockControl',
+                headers: { 'Authorization': localStorage.getItem('token') },
+                data: { lockName: name, status: 'open' }
+            }).then(response => {
+                if (response.status === 200) {
+                    // Lock was successfully opened
+                    console.log('Lock was successfully opened');
+                }
             })
-                .then(response => {
-                    if (response.status === 200) {
-                        // Lock was successfully opened
-                        console.log('Lock was successfully opened');
-                    }
-                })
                 .catch(error => {
                     if (error.response.status === 401) {
                         // Unauthorized, display error message
@@ -58,12 +74,14 @@ export default {
                     }
                 });
         },
-        close() {
+        close(name) {
             // Send a request to the server to close the lock
-            axios.post(api_url + '/locks/lockControl', {
-                lockId: this.locks.id
-            })
-                .then(response => {
+            axios({
+                method: 'post',
+                url: api_url + '/locks/lockControl',
+                headers: { 'Authorization': localStorage.getItem('token') },
+                data: { lockName: name, status: 'close' }
+            }).then(response => {
                     if (response.status === 200) {
                         // Lock was successfully closed
                         console.log('Lock was successfully closed');
@@ -78,6 +96,9 @@ export default {
                         this.errorMessage = 'Something went wrong'
                     }
                 });
+        },
+        edit() {
+            this.$router.push('/editlock');
         }
     },
     async mounted() {
@@ -86,7 +107,7 @@ export default {
             this.$router.push('/login');
         }
         // Get the list of locks
-        let result = await axios.get(api_url + '/dashboard', {headers: {'Authorization': localStorage.getItem('token')}});
+        let result = await axios.get(api_url + '/dashboard', { headers: { 'Authorization': localStorage.getItem('token') } });
         this.locks = result.data;
         console.log(this.locks);
     }
@@ -102,17 +123,25 @@ button {
     display: inline-block;
     font-size: 16px;
 }
-button:active{
+
+button:active {
     opacity: 0.8;
 }
+
 #open {
     background-color: #4CAF50;
     border: 1px solid #4CAF50;
     color: darkgreen;
 }
-#close{
+
+#close {
     background-color: #f44336;
     border: 1px solid #f44336;
     color: darkred;
+}
+#edit {
+    background-color: #2196F3;
+    border: 1px solid #2196F3;
+    color: darkblue;
 }
 </style>

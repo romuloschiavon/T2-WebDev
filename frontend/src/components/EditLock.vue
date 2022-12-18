@@ -1,13 +1,13 @@
 <template>
     <TopHeader/>
-    <h1>Manage Locks Page</h1>
+    <h1>Edit Selected Lock Page</h1>
 </template>
 
 <script>
 import TopHeader from './Header.vue'
 
 export default {
-    name: 'ManageLocks',
+    name: 'EditLock',
     components: {
         TopHeader
     },

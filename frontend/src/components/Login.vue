@@ -15,6 +15,7 @@
 
 
 <script>
+import VueJwtDecode from 'vue-jwt-decode'
 import axios from 'axios'
 import api_url from '../config'
 
@@ -43,6 +44,11 @@ export default {
             // User was successfully authenticated
             localStorage.setItem('token', response.data.token)
             this.$router.push('/home') // redirect to home page
+            //verify if the user is admin
+            let decoded = VueJwtDecode.decode(response.data.token);
+            if(decoded.admin){
+              localStorage.setItem('admin', true)
+            }
           }
         })
         .catch(error => {
