@@ -6,7 +6,7 @@
             <input id="name" v-model="name" type="text" required placeholder="Name">
             <input id="password" v-model="password" type="password" required placeholder="Password">
             <input id="passwordCorfim" v-model="passwordCorfim" type="password" required placeholder="Confirm Password">
-            <button style="display: flex; justify-content: center;" v-on:click="addLock">Add Lock</button>
+            <button v-on:click="addLock">Add Lock</button>
         </form>
     </div>
 </template>
@@ -80,6 +80,7 @@ export default {
 form {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 label {
