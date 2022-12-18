@@ -149,4 +149,41 @@ const changeLockName = async (req, res) => {
 	}
 };
 
-module.exports = { addToLockHistory, removeFromLockHistory, changeLockName };
+const removeLock = async (req, res) => {
+	// Requires lock name
+	const { lockName } = req.body;
+	const admin = req.admin;
+
+	if (admin) {
+		try {
+			// Check if lock exists
+			const lockExists = await Lock.findOne({ name: lockName });
+			if (!lockExists) {
+				return res.status(400).json({ message: "Lock does not exist" });
+			}
+
+			// Remove lock from Lock collection
+			await Lock.deleteOne({ name: lockName });
+
+			// Remove references to lock in lockHistory field of User model
+			await User.updateMany(
+				{},
+				{ $pull: { lockHistory: { lockName: lockName } } }
+			);
+
+			return res.status(200).send({ message: "Removed lock" });
+		} catch (error) {
+			// Catches errors
+			return res.status(402).send({ message: error.message });
+		}
+	} else {
+		return res.status(401).json({ message: "Unauthorized" });
+	}
+};
+
+module.exports = {
+	addToLockHistory,
+	removeFromLockHistory,
+	changeLockName,
+	removeLock,
+};
