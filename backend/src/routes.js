@@ -24,11 +24,21 @@ router.get("/dashboard", auth.verify, userController.dashboard);
 router.get("/locks/getLockUsers", auth.verify, userController.getAllUsersFromLock);
 
 // Create a route for creating locks
-router.post("/locks/create", auth.verify, lockController.create);
+router.post("/locks/create", auth.verify, lockController.createLock);
+
+// Update the lock name
+router.post("/locks/update", auth.verify, luController.changeLockName);
+
+// Remove Lock and dependencies
+router.post("locks/remove", auth.verify, luController.removeLock);
 
 // Open or close Lock
-router.post("/locks/lockControl", auth.verify, lockController.lockControl, webSocketController.handleAskLockTo);
-
+router.post(
+	"/locks/lockControl",
+	auth.verify,
+	lockController.lockControl,
+	webSocketController.handleAskLockTo
+);
 
 // Create a route to correlate users and locks
 router.post(
@@ -43,6 +53,5 @@ router.post(
 	auth.verify,
 	luController.removeFromLockHistory
 );
-
 
 module.exports = router;

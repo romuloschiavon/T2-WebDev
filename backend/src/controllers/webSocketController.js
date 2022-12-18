@@ -32,7 +32,6 @@ setInterval(() => {
 	}
 }, 10000); // run the check every 10000 milliseconds (10 seconds)
 
-
 async function handleAskLockTo(req, res) {
 	const status = req.status;
 	const id_sala = req.lockName;

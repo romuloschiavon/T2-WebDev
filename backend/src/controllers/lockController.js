@@ -7,7 +7,7 @@ dotenv.config({
 }); // Config the local ENV
 
 // Function to handle lock creation
-const create = async (req, res) => {
+const createLock = async (req, res) => {
 	// Extract the lock name and password from the request body
 	const { name, password, confirm_password } = req.body;
 	const admin = req.admin;
@@ -21,13 +21,9 @@ const create = async (req, res) => {
 		try {
 			// Check for the password confirmation
 			if (!password || !confirm_password) {
-				return res
-					.status(422)
-					.json({ message: "Bad authentication" });
+				return res.status(422).json({ message: "Bad authentication" });
 			} else if (password !== confirm_password) {
-				return res
-					.status(422)
-					.json({ message: "Bad authentication" });
+				return res.status(422).json({ message: "Bad authentication" });
 			}
 
 			// Encrypt the password
@@ -43,29 +39,37 @@ const create = async (req, res) => {
 			// If there was an error, send a failure response
 			return res.status(500).json({ message: error.message });
 		}
-	}else{
-		return res.status(402).json({message: "Unauthorized"})
+	} else {
+		return res.status(402).json({ message: "Unauthorized" });
 	}
 };
 
 const lockControl = async (req, res, next) => {
 	const { lockName, status } = req.body;
-
+	let check;
 	try {
+		if (status == "open") {
+			check = false;
+		} else {
+			check = true;
+		}
 		const lockExists = await Lock.findOne({ name: lockName });
 		if (lockExists) {
-			if(lockExists.isLocked === status){
-				return res.status(402).json({ message: "Lock is already in " + status + " status"})
-			}else{
-				req.status = status
-				req.lockName = lockName
-				return next()
+			if (lockExists.isLocked == check) {
+				return res
+					.status(402)
+					.json({
+						message: "Lock is already in " + status + "ed status",
+					});
+			} else {
+				req.status = status;
+				req.lockName = lockName;
+				return next();
 			}
 		}
 	} catch (error) {
-		return res.status(500).json({ message: message.error })
+		return res.status(500).json({ message: message.error });
 	}
-	
-}
+};
 
-module.exports = { create, lockControl};
+module.exports = { createLock, lockControl };
