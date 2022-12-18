@@ -32,14 +32,14 @@ const addToLockHistory = async (req, res) => {
 					.json({ message: "User does not exists" });
 			}
 
-			// Check if lock password is correct (should be)
-			const checkLockPass = await bcrypt.compare(
-				lockPassword,
-				lockExists.password
-			);
-			if (!checkLockPass) {
-				return res.status(401).json({ message: "Invalid credentials" });
-			}
+			// // Check if lock password is correct (should be)
+			// const checkLockPass = await bcrypt.compare(
+			// 	lockPassword,
+			// 	lockExists.password
+			// );
+			// if (!checkLockPass) {
+			// 	return res.status(401).json({ message: "Invalid credentials" });
+			// }
 
 			const newStartTime = convertTime(start_time);
 			const newEndTime = convertTime(end_time);
