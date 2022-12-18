@@ -19,7 +19,7 @@
             </td>
             <td>
                 <template v-if="userIsAdmin">
-                    <button id="edit" v-on:click="edit">Edit</button>
+                    <button id="edit" v-on:click="edit(lock.lockName)">Edit</button>
                 </template>
             </td>
         </tr>
@@ -97,7 +97,8 @@ export default {
                     }
                 });
         },
-        edit() {
+        edit(name) {
+            localStorage.setItem('lockName', name)
             this.$router.push('/editlock');
         }
     },
@@ -109,7 +110,6 @@ export default {
         // Get the list of locks
         let result = await axios.get(api_url + '/dashboard', { headers: { 'Authorization': localStorage.getItem('token') } });
         this.locks = result.data;
-        console.log(this.locks);
     }
 }
 </script>
