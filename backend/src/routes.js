@@ -20,9 +20,6 @@ router.post("/users/login", userController.login);
 // Get Dashboard
 router.get("/dashboard", auth.verify, userController.dashboard);
 
-// Get all Locks 
-router.get("/locks/getLockUsers", auth.verify, userController.getAllUsersFromLock);
-
 // Create a route for creating locks
 router.post("/locks/create", auth.verify, lockController.createLock);
 
@@ -39,6 +36,9 @@ router.post(
 	lockController.lockControl,
 	webSocketController.handleAskLockTo
 );
+
+// Get all Locks 
+router.get("/usersLocks/getLockUsers", auth.verify, userController.getAllUsersFromLock);
 
 // Create a route to correlate users and locks
 router.post(
