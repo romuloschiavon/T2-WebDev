@@ -106,7 +106,7 @@ const getAllUsersFromLock = async (req, res) => {
 		const { lockName } = req.body;
 
 		if (!lockName) {
-			return res.status(402).json({ message: "Bad Request" });
+			return res.status(402).json({ message: "Bad Request: No lock name found on body" });
 		}
 
 		try {
