@@ -7,7 +7,7 @@ dotenv.config({
 }); // Config the local ENV
 
 // Function to handle lock creation
-const create = async (req, res) => {
+const createLock = async (req, res) => {
 	// Extract the lock name and password from the request body
 	const { name, password, confirm_password } = req.body;
 	const admin = req.admin;
@@ -72,4 +72,4 @@ const lockControl = async (req, res, next) => {
 	}
 };
 
-module.exports = { create, lockControl };
+module.exports = { createLock, lockControl };
