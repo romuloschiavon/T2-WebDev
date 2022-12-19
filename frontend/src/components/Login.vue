@@ -7,8 +7,8 @@
         <input id="email" v-model="email" type="email" required placeholder="E-mail">
         <input id="password" v-model="password" type="password" required placeholder="Password">
         <div class="form-btn-container">
-          <button class="form-btn login-btn" v-on:click="login">Login</button>
-          <button class="form-btn signup-btn" v-on:click="register">Sign Up</button>
+          <button class="form-btn login-btn" v-on:click.prevent="login">Login</button>
+          <button class="form-btn signup-btn" v-on:click.prevent="register">Sign Up</button>
         </div>
       </form>
     </div>

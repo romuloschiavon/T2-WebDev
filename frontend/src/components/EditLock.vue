@@ -27,7 +27,7 @@
 
                     <button class="form-btn edit-lock-btn" v-on:click.prevent="editLockPassword">Save New
                         Password</button>
-                    <button class="form-btn edit-lock-btn delete-lock-btn" id="delete" v-on:click="deleteLock">Delete Lock</button>
+                    <button class="form-btn edit-lock-btn delete-lock-btn" id="delete" v-on:click.prevent="deleteLock">Delete Lock</button>
                 </div>
             </form>
         </div>
