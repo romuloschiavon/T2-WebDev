@@ -1,18 +1,20 @@
 <template>
-    <div class="img-container">
-        <img alt="UFSC logo" src="../assets/logo.png" class="img-logo-ufsc" />
-    </div>
-    <h1>Sign Up</h1>
-    <div class="signup-form">
-        <form @submit.prevent="signup">
-            <input id="name" v-model="name" type="text" required placeholder="Name">
-            <input id="email" v-model="email" type="email" required placeholder="E-mail">
-            <input id="password" v-model="password" type="password" required placeholder="Password">
-            <button v-on:click="signup">Sign Up</button>
-            <p>
-                <router-link to="/login">Already have an account? Login</router-link>
-            </p>
-        </form>
+    <div class="signup-container">
+        <div class="img-container">
+            <img alt="UFSC logo" src="../assets/logo.png" class="img-logo-ufsc" />
+        </div  >
+        <h1 class="signup-title">Sign Up</h1>
+        <div class="signup-form-container">
+            <form @submit.prevent="signup" class="signup-form">
+                <input id="email" v-model="email" type="email" required placeholder="E-mail">
+                <input id="password" v-model="password" type="password" required placeholder="Password">
+                <input id="password_confirmation" v-model="confirmPassword" type="password" required placeholder="Confirm Password">
+                <button class="signup-btn" v-on:click="signup">Sign Up</button>
+                <p>
+                    <router-link to="/login" scroll-behavior="smooth">Already have an account? Login</router-link>
+                </p>
+            </form>
+        </div>
     </div>
 </template>
   
@@ -26,22 +28,22 @@ export default {
     name: 'SignUp',
     data() {
         return {
-            name: '',
             email: '',
-            password: ''
+            password: '',
+            confirmPassword: ''
         }
     },
     methods: {
         async signup() {
             // Validate the form fields
-            if (!this.name || !this.email || !this.password) {
+            if (!this.email || !this.password || !this.confirmPassword) {
                 console.error('Email and password are required');
                 return;
             }
             await axios.post(api_url + '/users/register', {
-                name: this.name,
                 email: this.email,
-                password: this.password
+                password: this.password,
+                confirm_password: this.confirmPassword
             }).then(response => {
                 // handle success
                 if (response.status === 201) {
@@ -75,22 +77,70 @@ export default {
   
   
 <style scoped>
-.signup-form {
-    width: 300px;
-    margin: 0 auto;
+.signup-form-container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-
+.signup-btn{
+    width: 50%;
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+.signup-title{
+    text-align: center;
+    width: 100%;
+}
 form {
     display: flex;
     flex-direction: column;
 }
-
+.img-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
 label {
     margin-bottom: 5px;
 }
+@media screen and (min-width: 768px) {
+    .signup-container{
+        width: 50%;
+    }
+    .img-logo-ufsc {
+        width: 35%;
+    }
+}
 
+@media screen and (max-width: 768px) {
+    .signup-container{
+        width: 85%;
+    }
+    .img-logo-ufsc {
+        width: 100%;
+    }
+}
+.signup-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 input {
-    width: 300px;
+    width: 100%;
     height: 40px;
     padding-left: 20px;
     display: block;
@@ -101,16 +151,25 @@ input {
 }
 
 button {
-    width: 320px;
-    height: 40px;
     border: 1px solid skyblue;
     background: skyblue;
+    width: 50%;
+    height: 40px;
     color: white;
     cursor: pointer;
+    margin: 5px;
     text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
 }
-button:active{
+
+button:active {
     opacity: 0.8;
+}
+.login-link{
+    text-align: center;
+    width: 90%;
 }
 </style>
   

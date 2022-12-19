@@ -1,15 +1,15 @@
 <template>
-  <div class="img-container">
-    <img alt="UFSC logo" src="../assets/logo.png" class="img-logo-ufsc" />
-  </div>
-  <h1>Login</h1>
-  <div class="login-form">
-    <form @submit.prevent="login">
-      <input id="email" v-model="email" type="email" required placeholder="E-mail">
-      <input id="password" v-model="password" type="password" required placeholder="Password">
-      <button v-on:click="login">Login</button>
-      <button v-on:click="signup">Sign Up</button>
-    </form>
+  <div class="login-container">
+    <img alt="UFSC logo" src="../assets/logo.png" class="imagestyle"/>
+    <div class="login-form-container">
+      <h1 class="login-title">Login</h1>
+      <form @submit.prevent="login" class="login-form">
+        <input id="email" v-model="email" type="email" required placeholder="E-mail">
+        <input id="password" v-model="password" type="password" required placeholder="Password">
+        <button class="login-btn" v-on:click="login">Login</button>
+        <button class="signup-btn" v-on:click="register">Sign Up</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -46,7 +46,7 @@ export default {
             this.$router.push('/home') // redirect to home page
             //verify if the user is admin
             let decoded = VueJwtDecode.decode(response.data.token);
-            if(decoded.admin){
+            if (decoded.admin) {
               localStorage.setItem('admin', true)
             }
           }
@@ -61,7 +61,7 @@ export default {
           }
         });
     },
-    signup() {
+    register() {
       // Redirect to the sign up page
       this.$router.push('/signup');
     }
@@ -77,43 +77,112 @@ export default {
 
 
 <style scoped>
-.login-form {
-  width: 300px;
-  margin: 0 auto;
-}
 
-form {
+.login-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 50vw;
+  height: 80vh;
+  max-width: 80%;
+  max-height: 80%;
+  margin-left: 22.5vw;
+  margin-right: 22.5vw;
 }
 
-label {
-  margin-bottom: 5px;
+.login-form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.imagestyle {
+  height: 40vh;
+  width: auto;
 }
 
 input {
-  width: 300px;
+  width: 100%;
   height: 40px;
   padding-left: 20px;
   display: block;
   margin-bottom: 30px;
   margin-right: auto;
   margin-left: auto;
-  border: 1px solid skyblue;
+  border: 1px solid #353531;
+  border-radius: 1rem;
+}
+
+@media (max-width: 780px) {
+  .login-container {
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .login-form {
+    flex-direction: column;
+  }
 }
 
 button {
-  width: 320px;
-  height: 40px;
-  border: 1px solid skyblue;
-  background: skyblue;
-  color: white;
-  cursor: pointer;
-  margin: 5px;
-  text-align: center;
+  display: flex;
+  font-family: Ubuntu, sans-serif;
+  border-radius: 0.3rem;
+  padding: 3px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
-button:active{
-    opacity: 0.8;
+
+button:active {
+    transition: all 0.2s;
 }
+
+.login-form button:hover {
+  transform: scale(1.1);
+}
+
+.login-btn {
+  background-color: #FF9505;
+  border: 1px solid #FF9505;
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #f1f1f1;
+  width: 20vw;
+  height: 6vh;
+}
+
+.login-btn:hover {
+  background-color: #EC4E20;
+  border: 1px solid #EC4E20;
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #fff;
+}
+
+.signup-btn {
+  background-color: #016fb9;
+  border: 1px solid #016fb9;
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #f1f1f1;
+  width: 20vw;
+  height: 6vh;
+}
+
+.signup-btn:hover{
+  background-color: #00548b;
+  border: 1px solid #00548b;
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #f1f1f1;
+}
+
 </style>
 
