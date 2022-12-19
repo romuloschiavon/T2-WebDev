@@ -8,7 +8,7 @@
                 <input id="password" v-model="password" type="password" required placeholder="Password">
                 <input id="passwordConfirm" v-model="passwordConfirm" type="password" required
                     placeholder="Confirm Password">
-                <button class="form-btn add-lock-btn" v-on:click="addLock">Add Lock</button>
+                <button class="form-btn add-lock-btn" >Add Lock</button>
             </form>
         </div>
     </div>
@@ -34,6 +34,7 @@ export default {
     },
     methods: {
         addLock() {
+            console.log("Add lock button clicked");
             // Validate the form fields
             if (!this.name || !this.password || !this.passwordConfirm) {
                 console.error('Name and password are required');
@@ -41,7 +42,7 @@ export default {
             }
             // verify that the passwords match
             if (this.password != this.passwordConfirm) {
-                console.error('Passwords do not match');
+                console.error('Passwords does not match');
                 return;
             }
             // Send a request to the server to authenticate the user
@@ -104,12 +105,14 @@ export default {
     border: 1px solid #ec4e20;
     color: #fff;
 }
-.add-new-lock-page-container{
+
+.add-new-lock-page-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.add-lock-form{
+
+.add-lock-form {
     width: 55%;
 }
 </style>

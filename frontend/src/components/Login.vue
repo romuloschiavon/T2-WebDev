@@ -3,7 +3,7 @@
     <img alt="UFSC logo" src="../assets/logo.png" class="imagestyle" />
     <div class="form-container">
       <h1 class="login-title">Login</h1>
-      <form @submit.prevent="login" class="credentials-form">
+      <form  class="credentials-form">
         <input id="email" v-model="email" type="email" required placeholder="E-mail">
         <input id="password" v-model="password" type="password" required placeholder="Password">
         <div class="form-btn-container">

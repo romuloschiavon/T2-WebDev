@@ -53,6 +53,15 @@ module.exports = {
             if (activeWebSockets[i][1] == oldLockName) {
                 console.log("Atualizando o nome da sala " + oldLockName + " para " + newLockName);
                 activeWebSockets[i][1] = newLockName;
+                activeWebSockets[i][0].send(
+                    JSON.stringify({
+                        type: "updateName",
+                        data: {
+                            lockName: newLockName,
+                        },
+                    })
+                );
+                
                 return;
             }
         }

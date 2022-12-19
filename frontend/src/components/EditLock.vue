@@ -2,23 +2,21 @@
     <TopHeader />
     <div class="form-page-container edit-lock-page-container">
         <h1>Edit Lock: <a class="lock-name-style">{{ lock }}</a></h1>
-        <div class="form-container edit-form-container">
+        <div  @submit.prevent="editLockName" class="form-container edit-form-container">
             <form class="credentials-form edit-lock-form" @submit.prevent="addLock">
 
-                <label for="name">Name:</label>
-                <input id="name" v-model="name" type="text" required placeholder="Edit Name">
+                <label for="name">New Name:</label>
+                <input id="name" v-model="name" type="text" required placeholder="Lock Name">
                 <div class="form-btn-container">
-                    <button class="form-btn edit-lock-btn " v-on:click="editLockName">Save New Name</button>
+                    <button class="form-btn edit-lock-btn " >Save New Name</button>
                 </div>
             </form>
         </div>
 
 
         <div class="form-container edit-form-container">
-            <form class="credentials-form edit-lock-form">
+            <form  class="credentials-form edit-lock-form">
 
-                <label for="name">Name:</label>
-                <input id="name" v-model="name" type="text" required placeholder="Lock Name">
                 <label for="password">New Password:</label>
                 <input id="password" v-model="password" type="password" required placeholder="New Password">
                 <input id="passwordConfirm" v-model="passwordConfirm" type="password" required

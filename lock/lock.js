@@ -47,7 +47,10 @@ rws.addEventListener('message', (message) => {
         const data = rsp.data;
         handleLogin(data);
     }
-
+    if(rsp.type == 'updateName'){
+        console.log('Mudando o nome da sala para: ' + rsp.data.lockName);
+        id_sala = rsp.data.lockName;
+    }
     if (rsp.type == 'open') {
         console.log('Abrindo a fechadura...');
         is_locked = false;

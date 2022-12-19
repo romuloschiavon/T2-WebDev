@@ -8,7 +8,7 @@
                 <input id="password" v-model="password" type="password" required placeholder="Password">
                 <input id="password_confirmation" v-model="confirmPassword" type="password" required
                     placeholder="Confirm Password">
-                <button class="form-btn signup-btn" v-on:click="signup">Sign Up</button>
+                <button class="form-btn signup-btn" >Sign Up</button>
                 <p>
                     <router-link to="/login" class="link-to-login" scroll-behavior="smooth">Already have an account? Login</router-link>
                 </p>
