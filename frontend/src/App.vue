@@ -50,6 +50,7 @@ body{
   margin: 0;
   overflow-x: hidden
 }
+
 .app-container {
   width: 100vw;
   min-width: 100vw;

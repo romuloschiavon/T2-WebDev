@@ -88,15 +88,6 @@ export default {
   justify-content: center;
 }
 
-.login-btn {
-  background-color: #4CAF50;
-
-}
-
-.signup-btn {
-  background-color: #1f9cbe;
-}
-
 .login-title {
   text-align: center;
   width: 100%;
@@ -126,7 +117,7 @@ label {
   margin-bottom: 5px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
   .login-container {
     width: 50%;
   }
@@ -136,17 +127,52 @@ label {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
   .login-container {
     width: 85%;
   }
 
   .img-logo-ufsc {
-    width: 100%;
+    width: 60%;
+  }
+
+  .login-btn {
+    background-color: #4CAF50;
+    font-size: 1rem;
+    transition: all 0.2s;
+    color: #f1f1f1;
+    width: 20vw;
+    height: 6vh;
+  }
+
+  .login-btn:hover{
+    font-size: 1rem;
+    transition: all 0.2s;
+    width: 20vw;
+    height: 6vh;
+  }
+
+  .signup-btn {
+    background-color: #016fb9;
+    border: 1px solid #016fb9;
+    font-size: 1rem;
+    transition: all 0.2s;
+    color: #f1f1f1;
+    width: 20vw;
+    height: 6vh;
+  }
+
+  .signup-btn:hover{
+    font-size: 1rem;
+    transition: all 0.2s;
+    width: 20vw;
+    height: 6vh;
   }
 }
 
 .login-container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -165,21 +191,48 @@ input {
 }
 
 button {
-  border: 1px solid skyblue;
-  background: skyblue;
-  width: 50%;
-  height: 40px;
-  color: white;
-  cursor: pointer;
-  margin: 5px;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 18px;
+  display: flex;
+  font-family: Ubuntu, sans-serif;
+  border-radius: 0.3rem;
+  padding: 3px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
 
 button:active {
-  opacity: 0.8;
+    transition: all 0.2s;
 }
+
+.login-btn {
+  background-color: #4CAF50;
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #f1f1f1;
+  width: 20vw;
+  height: 6vh;
+}
+
+.signup-btn {
+  background-color: #016fb9;
+  border: 1px solid #016fb9;
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #f1f1f1;
+  width: 20vw;
+  height: 6vh;
+}
+
+.signup-btn:hover{
+  background-color: #00548b;
+  border: 1px solid #00548b;
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #f1f1f1;
+  width: 20vw;
+  height: 6vh;
+}
+
 </style>
 
