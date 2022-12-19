@@ -1,17 +1,17 @@
 <template>
   <div class="login-container">
-      <div class="img-container">
-          <img alt="UFSC logo" src="../assets/logo.png" class="img-logo-ufsc" />
-      </div  >
-      <h1 class="login-title">Login</h1>
-      <div class="login-form-container">
-          <form @submit.prevent="login" class="login-form">
-              <input id="email" v-model="email" type="email" required placeholder="E-mail">
-              <input id="password" v-model="password" type="password" required placeholder="Password">
-              <button class="login-btn" v-on:click="login">Login</button>
-            <button class="signup-btn" v-on:click="register">Sign Up</button>
-          </form>
-      </div>
+    <div class="img-container">
+      <img alt="UFSC logo" src="../assets/logo.png" class="img-logo-ufsc" />
+    </div>
+    <h1 class="login-title">Login</h1>
+    <div class="login-form-container">
+      <form @submit.prevent="login" class="login-form">
+        <input id="email" v-model="email" type="email" required placeholder="E-mail">
+        <input id="password" v-model="password" type="password" required placeholder="Password">
+        <button class="login-btn" v-on:click="login">Login</button>
+        <button class="signup-btn" v-on:click="register">Sign Up</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -48,7 +48,7 @@ export default {
             this.$router.push('/home') // redirect to home page
             //verify if the user is admin
             let decoded = VueJwtDecode.decode(response.data.token);
-            if(decoded.admin){
+            if (decoded.admin) {
               localStorage.setItem('admin', true)
             }
           }
@@ -80,94 +80,106 @@ export default {
 
 <style scoped>
 .login-form-container {
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.login-btn{
-    background-color: #4CAF50;
-    
+
+.login-btn {
+  background-color: #4CAF50;
+
 }
-.signup-btn{
-    background-color: #1f9cbe;
+
+.signup-btn {
+  background-color: #1f9cbe;
 }
-.login-title{
-    text-align: center;
-    width: 100%;
+
+.login-title {
+  text-align: center;
+  width: 100%;
 }
+
 form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-.img-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
-.login-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 }
+
 label {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
+
 @media screen and (min-width: 768px) {
-    .login-container{
-        width: 50%;
-    }
-    .img-logo-ufsc {
-        width: 35%;
-    }
+  .login-container {
+    width: 50%;
+  }
+
+  .img-logo-ufsc {
+    width: 35%;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .login-container{
-        width: 85%;
-    }
-    .img-logo-ufsc {
-        width: 100%;
-    }
-}
-.login-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-input {
+  .login-container {
+    width: 85%;
+  }
+
+  .img-logo-ufsc {
     width: 100%;
-    height: 40px;
-    padding-left: 20px;
-    display: block;
-    margin-bottom: 30px;
-    margin-right: auto;
-    margin-left: auto;
-    border: 1px solid skyblue;
+  }
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  padding-left: 20px;
+  display: block;
+  margin-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid skyblue;
 }
 
 button {
-    width: 50%;
-    height: 40px;
-    border: 1px solid skyblue;
-    background: skyblue;
-    color: white;
-    cursor: pointer;
-    text-align: center;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  border: 1px solid skyblue;
+  background: skyblue;
+  width: 50%;
+  height: 40px;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
 }
 
 button:active {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 </style>
 

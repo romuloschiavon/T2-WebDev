@@ -1,13 +1,16 @@
 <template>
     <TopHeader />
-    <h1>Add a New Lock</h1>
-    <div class="addLock-form">
-        <form @submit.prevent="addLock">
-            <input id="name" v-model="name" type="text" required placeholder="Name">
-            <input id="password" v-model="password" type="password" required placeholder="Password">
-            <input id="passwordCorfim" v-model="passwordCorfim" type="password" required placeholder="Confirm Password">
-            <button v-on:click="addLock">Add Lock</button>
-        </form>
+    <div class="add-lock-container">
+        <h1>Add a New Lock</h1>
+        <div class="addLock-form-container">
+            <form @submit.prevent="addLock" class="addLock-form">
+                <input id="name" v-model="name" type="text" required placeholder="Name">
+                <input id="password" v-model="password" type="password" required placeholder="Password">
+                <input id="passwordCorfim" v-model="passwordCorfim" type="password" required
+                    placeholder="Confirm Password">
+                <button v-on:click="addLock">Add Lock</button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -72,6 +75,26 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (min-width: 768px) {
+    .add-lock-container{
+        width: 50%;
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .add-lock-container{
+        width: 85%;
+    }
+    
+}
+.add-lock-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .addLock-form {
     width: 300px;
     margin: 0 auto;
@@ -86,9 +109,8 @@ form {
 label {
     margin-bottom: 5px;
 }
-
 input {
-    width: 300px;
+    width: 100%;
     height: 40px;
     padding-left: 20px;
     display: block;
@@ -99,14 +121,17 @@ input {
 }
 
 button {
-    width: 320px;
-    height: 40px;
     border: 1px solid skyblue;
     background: skyblue;
+    width: 50%;
+    height: 40px;
     color: white;
     cursor: pointer;
     margin: 5px;
     text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
 }
 
 button:active {
