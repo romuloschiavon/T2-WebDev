@@ -10,7 +10,7 @@
                 <input id="password" v-model="password" type="password" required placeholder="Password">
                 <input id="password_confirmation" v-model="confirmPassword" type="password" required placeholder="Confirm Password">
                 <button class="signup-btn" v-on:click="signup">Sign Up</button>
-                <p>
+                <p class="login-link">
                     <router-link to="/login">Already have an account? Login</router-link>
                 </p>
             </form>
@@ -120,7 +120,7 @@ label {
 }
 @media screen and (min-width: 768px) {
     .signup-container{
-        width: 40%;
+        width: 50%;
     }
     .img-logo-ufsc {
         width: 35%;
@@ -129,7 +129,7 @@ label {
 
 @media screen and (max-width: 768px) {
     .signup-container{
-        width: 80%;
+        width: 85%;
     }
     .img-logo-ufsc {
         width: 100%;
@@ -163,6 +163,10 @@ button {
 
 button:active {
     opacity: 0.8;
+}
+.login-link{
+    text-align: center;
+    width: 90%;
 }
 </style>
   
