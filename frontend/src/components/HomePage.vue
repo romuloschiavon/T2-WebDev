@@ -1,37 +1,39 @@
 <template>
     <TopHeader />
-    <h1>Available Locks</h1>
-    <table>
-        <tr>
-            <th>Room</th>
-            <th>Access Time</th>
-        </tr>
-        <tr v-for="lock in locks" :key="lock.id">
-            <td>{{ lock.lockName }}</td>
-            <td>
-            <table>
-                <tr v-for="time in lock.time_frames" :key="time.id">
-                <td>from</td>
-                <td>{{ convertToLocale(time.start_time) }}</td>
-                <td>to</td>
-                <td>{{ convertToLocale(time.end_time) }}</td>
-                <td>
-                    <button id="open" v-on:click="open(lock.lockName)">Open</button>
-                </td>
-                <td>
-                    <button id="close" v-on:click="close(lock.lockName)">Close</button>
-                </td>
-                <td>
-                    <template v-if="userIsAdmin">
-                    <button id="edit" v-on:click="edit(lock.lockName)">Edit</button>
-                    </template>
-                </td>
+    <div class="home-container">
+        <h1 class="page-header">Available Locks</h1>
+        <div class="table-container">
+            <table class="room-table">
+                <tr class="room-table-header">
+                    <th>Room</th>
+                    <th>Access Time</th>
+                    <th>Actions</th>
+                </tr>
+                <tr v-for="lock in locks" :key="lock.id" class="room-table-row">
+                    <td class="room-column">{{ lock.lockName }}</td>
+                    <td class="time-frame-column">
+                        <table class="time-frame-table">
+                            <tr v-for="time in lock.time_frames" :key="time.id" class="time-frame-row">
+                                <td>from {{ convertToLocale(time.start_time) }} to {{ convertToLocale(time.end_time) }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="actions-column">
+                        <div class="button-container">
+                            <button class="open-btn" v-on:click="open(lock.lockName)">Open</button>
+                            <button class="close-btn" v-on:click="close(lock.lockName)">Close</button>
+                            <template v-if="userIsAdmin">
+                                <button class="edit-btn" v-on:click="edit(lock.lockName)">Edit</button>
+                            </template>
+                        </div>
+                    </td>
                 </tr>
             </table>
-            </td>
-        </tr>
-    </table>
+        </div>
+    </div>
 </template>
+  
 
 <script>
 import TopHeader from './Header.vue'
@@ -89,11 +91,11 @@ export default {
                 headers: { 'Authorization': localStorage.getItem('token') },
                 data: { lockName: name, status: 'close' }
             }).then(response => {
-                    if (response.status === 200) {
-                        // Lock was successfully closed
-                        console.log('Lock was successfully closed');
-                    }
-                })
+                if (response.status === 200) {
+                    // Lock was successfully closed
+                    console.log('Lock was successfully closed');
+                }
+            })
                 .catch(error => {
                     if (error.response.status === 401) {
                         // Unauthorized, display error message
@@ -127,9 +129,82 @@ export default {
 </script>
 
 <style>
+.time-frame-row{
+    width: 100%;
+}
+.room-column {
+    width: 30%;
+    background-color: white;
+}
+
+.time-frame-column {
+    width: 60%;
+    background-color: white;
+}
+
+.actions-column {
+    width: 10%;
+    background-color: white;
+}
+
+.page-header {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* se estiver em uma tela media ou grande, o tamanho do home container é 70%, senão é 100% */
+@media screen and (min-width: 768px) {
+    .home-container {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .home-container {
+        width: 100%;
+    }
+}
+
+.home-container {
+    margin: auto;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+table.time-frame-table {
+    /* Coloca a largura em 90% e quebra a linha caso seja grande demais */
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+
+}
+
+
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
+
+
+table.room-table {
+    width: 100%;
+    background-color: #aaaaaa;
+}
+
 button {
     border-radius: 12px;
-    padding: 15px 32px;
+    padding: 3px 4px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -140,20 +215,23 @@ button:active {
     opacity: 0.8;
 }
 
-#open {
+.open-btn {
     background-color: #4CAF50;
     border: 1px solid #4CAF50;
     color: darkgreen;
+    width: 60px;
 }
 
-#close {
+.close-btn {
     background-color: #f44336;
     border: 1px solid #f44336;
-    color: darkred;
+    width: 60px;
 }
-#edit {
+
+.edit-btn {
     background-color: #2196F3;
     border: 1px solid #2196F3;
     color: darkblue;
+    width: 60px;
 }
 </style>
