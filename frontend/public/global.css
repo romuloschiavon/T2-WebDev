@@ -1,0 +1,112 @@
+.login-container {
+  
+}
+.form-page-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+    height: 80vh;
+    max-height: 80%;
+    margin-left: 22.5vw;
+    margin-right: 22.5vw;
+}
+.login-form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.imagestyle {
+  height: 40vh;
+  width: auto;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  padding-left: 20px;
+  display: block;
+  margin-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid #353531;
+  border-radius: 1rem;
+}
+
+@media (max-width: 780px) {
+  .login-container {
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .login-form {
+    flex-direction: column;
+  }
+}
+
+button {
+  display: flex;
+  font-family: Ubuntu, sans-serif;
+  border-radius: 0.3rem;
+  padding: 3px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+button:active {
+  transition: all 0.2s;
+}
+
+.login-form button:hover {
+  transform: scale(1.1);
+}
+.form-btn-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-btn{
+    font-size: 1rem;
+    transition: all 0.2s;
+    color: #f1f1f1;
+    width: 80%;
+    height: 6vh;
+}
+.form-btn:hover{
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.login-btn {
+  background-color: #ff9505;
+  border: 1px solid #ff9505;
+  
+}
+
+.login-btn:hover {
+  background-color: #ec4e20;
+  border: 1px solid #ec4e20;
+  color: #fff;
+}
+
+.signup-btn {
+  background-color: #016fb9;
+  border: 1px solid #016fb9;
+  
+}
+
+.signup-btn:hover {
+  background-color: #00548b;
+  border: 1px solid #00548b;
+  color: #f1f1f1;
+}
