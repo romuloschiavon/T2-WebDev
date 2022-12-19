@@ -17,7 +17,7 @@ const options = {
     connectionTimeout: 1000,
     maxRetries: 10
 };
-const rws = new ReconnectingWebSocket('ws://localhost:3000', [], options);
+const rws = new ReconnectingWebSocket('ws://192.168.43.181:3000', [], options);
 
 function handleLogin(data) {
     if (data.autorizado) {

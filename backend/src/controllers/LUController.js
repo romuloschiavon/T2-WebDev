@@ -221,10 +221,13 @@ const changeLockPassword = async (req, res) => {
 				return res.status(400).json({ message: "Lock does not exist" });
 			}
 
+			const passHash = await bcrypt.hash(lockPassword, 10);
+
 			// Update lock password in Lock collection
 			await Lock.updateOne(
-				{ name: lockName },
-				{ password: lockPassword }
+				{ name: lockName,
+				password: passHash 			
+				}
 			);
 
 			// Return 200
