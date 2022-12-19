@@ -1,5 +1,5 @@
 <template>
-  <div class="form-page-container login-container">
+  <div class="form-page-container credential-page-container">
     <img alt="UFSC logo" src="../assets/logo.png" class="imagestyle" />
     <div class="form-container">
       <h1 class="login-title">Login</h1>

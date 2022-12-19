@@ -1,21 +1,25 @@
 .form-page-container {
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  margin: auto;
 }
-.form-page-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 50vw;
-    height: 80vh;
-    max-height: 80%;
-    margin-left: 22.5vw;
-    margin-right: 22.5vw;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
 }
 .credentials-form {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+  margin: auto;
 }
 
 .imagestyle {
@@ -24,41 +28,65 @@
 }
 
 input {
+  min-width: 150px;
   width: 100%;
   height: 40px;
-  padding-left: 20px;
-  display: block;
   margin-bottom: 30px;
-  margin-right: auto;
-  margin-left: auto;
   border: 1px solid #353531;
   border-radius: 1rem;
+  border: 1px solid skyblue;
 }
-
+@media screen and (min-width: 781px) {
+    .credential-page-container{
+        height: 100vh;
+    }
+    
+}
 @media (max-width: 780px) {
   .form-page-container {
     display: block;
-    width: 90%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
     margin-bottom: 0;
   }
-
+  h1 {
+    font-size: 1.5rem;
+  }
+  .imagestyle {
+    height: 20vh;
+    width: auto;
+    margin: auto;
+  }
   .credentials-form {
     flex-direction: column;
+    
+  }
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
   }
 }
 
 button {
   display: flex;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   border-radius: 0.3rem;
   padding: 3px 4px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  color: white;
+  height: 40px;
+  cursor: pointer;
+  margin: 5px;
+  text-align: center;
 }
 
 button:active {
@@ -68,29 +96,28 @@ button:active {
 .credentials-form button:hover {
   transform: scale(1.1);
 }
-.form-btn-container{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.form-btn-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.form-btn{
-    font-size: 1rem;
-    transition: all 0.2s;
-    color: #f1f1f1;
-    width: 80%;
-    height: 6vh;
+.form-btn {
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #f1f1f1;
+  width: 80%;
+  height: 6vh;
 }
-.form-btn:hover{
-    font-size: 1rem;
-    transition: all 0.2s;
+.form-btn:hover {
+  font-size: 1rem;
+  transition: all 0.2s;
 }
 
 .login-btn {
   background-color: #ff9505;
   border: 1px solid #ff9505;
-  
 }
 
 .login-btn:hover {
@@ -102,7 +129,6 @@ button:active {
 .signup-btn {
   background-color: #016fb9;
   border: 1px solid #016fb9;
-  
 }
 
 .signup-btn:hover {
@@ -110,3 +136,9 @@ button:active {
   border: 1px solid #00548b;
   color: #f1f1f1;
 }
+
+
+label {
+  margin-bottom: 5px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;

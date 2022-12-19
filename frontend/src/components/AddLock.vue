@@ -1,9 +1,9 @@
 <template>
     <TopHeader />
-    <div class="form-page add-lock-container">
+    <div class="form-page-container add-new-lock-page-container">
         <div class="form-container">
-        <h1>Add a New Lock</h1>
-            <form @submit.prevent="addLock" class="credentials-form">
+            <h1>Add a New Lock</h1>
+            <form @submit.prevent="addLock" class="credentials-form add-lock-form">
                 <input id="name" v-model="name" type="text" required placeholder="Name">
                 <input id="password" v-model="password" type="password" required placeholder="Password">
                 <input id="passwordCorfim" v-model="passwordCorfim" type="password" required
@@ -75,24 +75,30 @@ export default {
 </script>
 
 <style scoped>
-
-
 .add-lock-btn {
-  background-color: #ff9505;
-  border: 1px solid #ff9505;
-        width: 80%;
-  
+    background-color: #ff9505;
+    border: 1px solid #ff9505;
+    width: 80%;
+
 }
 
 @media screen and (min-width: 450px) {
-    .add-lock-btn{
+    .add-lock-btn {
         max-width: 300px;
     }
 }
 
 .add-lock-btn:hover {
-  background-color: #ec4e20;
-  border: 1px solid #ec4e20;
-  color: #fff;
+    background-color: #ec4e20;
+    border: 1px solid #ec4e20;
+    color: #fff;
+}
+.add-new-lock-page-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add-lock-form{
+    width: 55%;
 }
 </style>
