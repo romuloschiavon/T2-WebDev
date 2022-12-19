@@ -1,5 +1,8 @@
 <template>
-  <router-view/>
+
+  <div class="app-container">
+    <router-view/>
+  </div>
 </template>
 
 <script>
@@ -27,5 +30,12 @@ export default {
 body{
   padding: 0;
   margin: 0;
+}
+.app-container {
+  width: 100vw;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

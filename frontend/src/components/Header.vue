@@ -47,6 +47,7 @@ export default {
     justify-content: space-between;
     background-color: #333;
     overflow: hidden;
+    width: 100%;
 }
 
 .nav a {
