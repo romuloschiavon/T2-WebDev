@@ -1,10 +1,8 @@
 <template>
   <div class="login-container">
-    <div class="img-container">
-      <img alt="UFSC logo" src="../assets/logo.png" class="img-logo-ufsc" />
-    </div>
-    <h1 class="login-title">Login</h1>
+    <img alt="UFSC logo" src="../assets/logo.png" class="imagestyle"/>
     <div class="login-form-container">
+      <h1 class="login-title">Login</h1>
       <form @submit.prevent="login" class="login-form">
         <input id="email" v-model="email" type="email" required placeholder="E-mail">
         <input id="password" v-model="password" type="password" required placeholder="Password">
@@ -79,104 +77,29 @@ export default {
 
 
 <style scoped>
-.login-form-container {
-  width: 100%;
-  margin: auto;
+
+.login-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-}
-
-.login-title {
-  text-align: center;
-  width: 100%;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.img-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  width: 50vw;
+  height: 80vh;
+  max-width: 80%;
+  max-height: 80%;
+  margin-left: 22.5vw;
+  margin-right: 22.5vw;
 }
 
 .login-form {
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: center;
-  align-self: center;
+  flex-wrap: wrap;
 }
 
-label {
-  margin-bottom: 5px;
-}
-
-@media screen and (min-width: 600px) {
-  .login-container {
-    width: 50%;
-  }
-
-  .img-logo-ufsc {
-    width: 35%;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .login-container {
-    width: 85%;
-  }
-
-  .img-logo-ufsc {
-    width: 60%;
-  }
-
-  .login-btn {
-    background-color: #4CAF50;
-    font-size: 1rem;
-    transition: all 0.2s;
-    color: #f1f1f1;
-    width: 20vw;
-    height: 6vh;
-  }
-
-  .login-btn:hover{
-    font-size: 1rem;
-    transition: all 0.2s;
-    width: 20vw;
-    height: 6vh;
-  }
-
-  .signup-btn {
-    background-color: #016fb9;
-    border: 1px solid #016fb9;
-    font-size: 1rem;
-    transition: all 0.2s;
-    color: #f1f1f1;
-    width: 20vw;
-    height: 6vh;
-  }
-
-  .signup-btn:hover{
-    font-size: 1rem;
-    transition: all 0.2s;
-    width: 20vw;
-    height: 6vh;
-  }
-}
-
-.login-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.imagestyle {
+  height: 40vh;
+  width: auto;
 }
 
 input {
@@ -187,7 +110,23 @@ input {
   margin-bottom: 30px;
   margin-right: auto;
   margin-left: auto;
-  border: 1px solid skyblue;
+  border: 1px solid #353531;
+  border-radius: 1rem;
+}
+
+@media (max-width: 780px) {
+  .login-container {
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .login-form {
+    flex-direction: column;
+  }
 }
 
 button {
@@ -205,13 +144,26 @@ button:active {
     transition: all 0.2s;
 }
 
+.login-form button:hover {
+  transform: scale(1.1);
+}
+
 .login-btn {
-  background-color: #4CAF50;
+  background-color: #FF9505;
+  border: 1px solid #FF9505;
   font-size: 1rem;
   transition: all 0.2s;
   color: #f1f1f1;
   width: 20vw;
   height: 6vh;
+}
+
+.login-btn:hover {
+  background-color: #EC4E20;
+  border: 1px solid #EC4E20;
+  font-size: 1rem;
+  transition: all 0.2s;
+  color: #fff;
 }
 
 .signup-btn {
@@ -230,8 +182,6 @@ button:active {
   font-size: 1rem;
   transition: all 0.2s;
   color: #f1f1f1;
-  width: 20vw;
-  height: 6vh;
 }
 
 </style>
