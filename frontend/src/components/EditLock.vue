@@ -1,60 +1,81 @@
 <template>
     <TopHeader />
-    <h1>Edit Lock: {{ lock }}</h1>
-    <div class="editLock-form">
-        <form @submit.prevent="addLock">
-            <div class="edit-lock">
+    <div class="form-page-container edit-lock-page-container">
+        <h1>Edit Lock: <a class="lock-name-style">{{ lock }}</a></h1>
+        <div class="form-container edit-form-container">
+            <form class="credentials-form edit-lock-form" @submit.prevent="addLock">
+
                 <label for="name">Name:</label>
                 <input id="name" v-model="name" type="text" required placeholder="Edit Name">
-                <button v-on:click="editLockName">Save New Name</button>
-                <br />
-            </div>
-        </form>
-        <form>
-            <div class="edit-lock">
+                <div class="form-btn-container">
+                    <button class="form-btn edit-lock-btn " v-on:click="editLockName">Save New Name</button>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="form-container edit-form-container">
+            <form class="credentials-form edit-lock-form">
+
                 <label for="name">Name:</label>
                 <input id="name" v-model="name" type="text" required placeholder="Lock Name">
                 <label for="password">New Password:</label>
                 <input id="password" v-model="password" type="password" required placeholder="New Password">
-                <input id="passwordCorfim" v-model="passwordCorfim" type="password" required
+                <input id="passwordConfirm" v-model="passwordConfirm" type="password" required
                     placeholder="Confirm Password">
-                <button v-on:click.prevent="editLockPassword">Save New Password</button>
+
+
+                <div class="form-btn-container">
+
+                    <button class="form-btn edit-lock-btn" v-on:click.prevent="editLockPassword">Save New
+                        Password</button>
+                    <button class="form-btn edit-lock-btn delete-lock-btn" id="delete" v-on:click="deleteLock">Delete Lock</button>
+                </div>
+            </form>
+        </div>
+        <div class="table-container">
+            <div class="usersLock-table">
+                <table class="lock-table">
+                    <thead>
+                        <tr class="room-table-header">
+                            <th>Email</th>
+                            <th>Access</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="room-table-row" v-for="user in usersInfo[Object.keys(usersInfo)[0]]" v-bind:key="user.email">
+                            <td class="email-column">{{ user.email }}</td>
+                            <td class="time-frame-column">
+                                {{ convertToLocale(user.start_time) }}
+                                <span class="material-icons">arrow_forward</span>
+                                {{ convertToLocale(user.end_time) }}
+                            </td>
+                            <td class="actions-column">
+                                <div class="button-container">
+                                    <button id="delete" class="form-btn edit-lock-btn delete-btn action-delete-brn" v-on:click="deleteUser(user)">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <button id="delete" v-on:click="deleteLock">Delete Lock</button>
-        </form>
-    </div>
-    <div class="usersLock-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>Access</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="user in usersInfo[Object.keys(usersInfo)[0]]" v-bind:key="user.email">
-                    <td>{{ user.email }}</td>
-                    <td>from</td>
-                    <td>{{ convertToLocale(user.start_time) }}</td>
-                    <td>to</td>
-                    <td>{{ convertToLocale(user.end_time) }}</td>
-                    <td>
-                        <button id="delete" v-on:click="deleteUser(user)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="new-user">
-        <label for="email">E-mail:</label>
-        <input id="email" v-model="email" type="email" required placeholder="E-mail">
-        <label for="start_time">Start Time:</label>
-        <input id="start_time" v-model="start_time" type="datetime-local" required>
-        <label for="end_time">End Time:</label>
-        <input id="end_time" v-model="end_time" type="datetime-local" required>
-        <button v-on:click="addNewUser">Add New User</button>
-        <br />
+        </div>
+        <div class="form-container edit-form-container">
+            <form action="" class="credentials-form edit-lock-form">
+                <label for="email">E-mail:</label>
+                <input id="email" v-model="email" type="email" required placeholder="E-mail">
+                <label for="start_time">Start Time:</label>
+                <input id="start_time" v-model="start_time" type="datetime-local" required>
+                <label for="end_time">End Time:</label>
+                <input id="end_time" v-model="end_time" type="datetime-local" required>
+                <div class="form-btn-container">
+                    <button class="form-btn edit-lock-btn " v-on:click="addNewUser">Add New User</button>
+                </div>
+            </form>
+
+
+        </div>
     </div>
 </template>
 
@@ -73,7 +94,7 @@ export default {
             lock: localStorage.getItem('lockName'),
             name: '',
             password: '',
-            passwordCorfim: '',
+            passwordConfirm: '',
             email: '',
             start_time: '',
             end_time: '',
@@ -110,7 +131,7 @@ export default {
             }
             console.log(data)
             // verify that the password is the same in both fields
-            if (this.password !== this.passwordCorfim) {
+            if (this.password !== this.passwordConfirm) {
                 this.errorMessage = 'Passwords do not match'
                 return
             }
@@ -251,57 +272,152 @@ export default {
 }
 </script>
 
-<style>
-.usersLock-table {
+<style scoped>
+.edit-lock-col {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    margin: 10px;
 }
 
-.edit-lock {
-    display: flex;
-    flex-direction: list-item;
-    align-items: center;
+.edit-lock-form {
+    width: 50%;
 }
 
-form {
+.edit-form-container {
+    /* coloca uma borda pra fazer uma separação */
+    border: 1px solid #ccc;
+
+}
+
+.edit-lock-page-container {
+    width: 80vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    max-height: none;
+    margin-left: 10vw;
+    margin-right: 10vw;    
 }
 
-label {
-    margin-bottom: 5px;
+.edit-lock-btn {
+    background-color: #016fb9;
+    border: 1px solid #016fb9;
+    color: #f1f1f1;
 }
 
-input {
-    width: 300px;
-    height: 40px;
-    padding-left: 20px;
-    display: block;
-    margin-bottom: 30px;
-    margin-right: auto;
-    margin-left: auto;
-    border: 1px solid skyblue;
+.edit-lock-btn:hover {
+    background-color: #00548b;
+    border: 1px solid #00548b;
+    color: #fff;
 }
 
-button {
-    width: 320px;
-    height: 40px;
-    border: 1px solid skyblue;
-    background: skyblue;
-    color: white;
-    cursor: pointer;
-    margin: 5px;
-    text-align: center;
+.delete-lock-btn {
+    background-color: #f44336;
+    border: 1px solid #f44336;
+    color: #f1f1f1;
 }
 
-#delete {
-    background: red;
-    border: 1px solid red;
+.delete-lock-btn:hover {
+    background-color: #a02c23;
+    border: 1px solid #a02c23;
+    color: #fff;
 }
 
-button:active {
-    opacity: 0.8;
+.delete-btn {
+    background-color: #f44336;
+    border: 1px solid #f44336;
+    color: #f1f1f1;
+}
+.action-delete-brn{
+    font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+    transition: all 0.2s;
+    background-color: #a02c23;
+    border: 1px solid #a02c23;
+}
+.table-container{
+    background-color: #f1f1f1;
+    color: #353531;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.table-container th {
+    font-family: Poppins, sans-serif;
+    font-size: 1.2rem;
+}
+
+table.lock-table {
+    width: 100%;
+}
+
+.email-column {
+    width: 30%;
+    background-color: #f1f1f1;
+    color: #353531;
+    font-family: Ubuntu, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.time-frame-column {
+    width: 60%;
+    background-color: #f1f1f1;
+}
+
+.actions-column {
+    width: 10%;
+    background-color: #f1f1f1;
+}
+
+.edit-lock-form label{
+    margin-top: 2vh;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .edit-lock-form {
+        width: 100%;
+    }
+    .edit-lock-page-container{
+        margin-bottom: 1vh;
+    }
+
+    input{
+        width: 10vw;
+    }
+
+    .table-container{
+        background-color: #f1f1f1;
+        color: #353531;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: auto;
+    }
+
+    .table-container th {
+        font-family: Poppins, sans-serif;
+        font-size: 1rem;
+    }
+}
+
+.edit-lock-form button{
+    margin-top: 0;
+    margin-bottom: 2vh;
+}
+
+.edit-lock-page-container{
+    margin-bottom: 10vh;
+}
+
+.lock-name-style{
+    color: #016fb9;
 }
 </style>

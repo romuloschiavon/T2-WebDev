@@ -295,7 +295,6 @@ button:active {
     transition: all 0.2s;
     background-color: #000;
     border: 1px solid #000;
-    color: #fff;
 }
 
 @media (max-width: 600px) {
