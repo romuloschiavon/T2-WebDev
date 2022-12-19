@@ -45,7 +45,7 @@ export default {
                 method: 'post',
                 url: api_url + '/locks/create',
                 headers: { 'Authorization': localStorage.getItem('token') },
-                data: { lockName: this.name, lockPassword: this.password }
+                data: { name: this.name, password: this.password, confirm_password: this.passwordCorfim }
             }).then(response => {
                 if (response.status === 200) {
                     console.log("Lock added successfully");

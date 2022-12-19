@@ -8,19 +8,25 @@
         </tr>
         <tr v-for="lock in locks" :key="lock.id">
             <td>{{ lock.lockName }}</td>
-            <td>{{ Date(lock.start_time).toLocaleString("pt-br") }}</td>
-            <td>TO</td>
-            <td>{{ Date(lock.end_time).toLocaleString("pt-br") }}</td>
             <td>
-                <button id="open" v-on:click="open(lock.lockName)">Open</button>
-            </td>
-            <td>
-                <button id="close" v-on:click="close(lock.lockName)">Close</button>
-            </td>
-            <td>
-                <template v-if="userIsAdmin">
+            <table>
+                <tr v-for="time in lock.time_frames" :key="time.id">
+                <td>{{ Date(time.start_time).toLocaleString("pt-br") }}</td>
+                <td>TO</td>
+                <td>{{ Date(time.end_time).toLocaleString("pt-br") }}</td>
+                <td>
+                    <button id="open" v-on:click="open(lock.lockName)">Open</button>
+                </td>
+                <td>
+                    <button id="close" v-on:click="close(lock.lockName)">Close</button>
+                </td>
+                <td>
+                    <template v-if="userIsAdmin">
                     <button id="edit" v-on:click="edit(lock.lockName)">Edit</button>
-                </template>
+                    </template>
+                </td>
+                </tr>
+            </table>
             </td>
         </tr>
     </table>

@@ -18,10 +18,10 @@
             </tr>
             <tr v-for="user in usersInfo" :key="user.id">
                 <td>{{ user.email }}</td>
-                <td>{{ Date(user.lockHistory).toLocaleString("pt-br") }}</td>
+                <td>{{ user.lockHistory.start_time.toLocaleString("pt-br") }}</td>
                 <td>
                     <button v-on:click="editUser(user.email)">Edit</button>
-                    <button id="delete" v-on:click="deleteUser(user.email)">Delete</button>
+                    <button id="delete" v-on:click="deleteUser(user.email, user.lockHistory.lockName)">Delete</button>
                 </td>
             </tr>
         </table>
@@ -72,9 +72,15 @@ export default {
         // editUser(email) {
         //     console.log("editUser");
         // },
-        // deleteUser(email) {
-        //     console.log("deleteUser");
-        // }
+        deleteUser(email, lock) {
+            let resp = {
+                    email: email,
+                    lockName: lock,
+                    start_time: lock.start_time,
+                    end_time: lock.end_time
+                }
+            console.log(resp);
+        }
     },
     async mounted() {
         // If the user is not logged in, redirect to the login page
