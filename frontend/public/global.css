@@ -1,4 +1,4 @@
-.login-container {
+.form-page-container {
   
 }
 .form-page-container{
@@ -11,7 +11,7 @@
     margin-left: 22.5vw;
     margin-right: 22.5vw;
 }
-.login-form {
+.credentials-form {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -36,7 +36,7 @@ input {
 }
 
 @media (max-width: 780px) {
-  .login-container {
+  .form-page-container {
     display: block;
     width: 90%;
     margin-left: auto;
@@ -45,14 +45,14 @@ input {
     margin-bottom: 0;
   }
 
-  .login-form {
+  .credentials-form {
     flex-direction: column;
   }
 }
 
 button {
   display: flex;
-  font-family: Ubuntu, sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   border-radius: 0.3rem;
   padding: 3px 4px;
   display: flex;
@@ -65,7 +65,7 @@ button:active {
   transition: all 0.2s;
 }
 
-.login-form button:hover {
+.credentials-form button:hover {
   transform: scale(1.1);
 }
 .form-btn-container{

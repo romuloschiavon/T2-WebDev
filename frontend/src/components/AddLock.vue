@@ -1,14 +1,14 @@
 <template>
     <TopHeader />
-    <div class="add-lock-container">
+    <div class="form-page add-lock-container">
+        <div class="form-container">
         <h1>Add a New Lock</h1>
-        <div class="addLock-form-container">
-            <form @submit.prevent="addLock" class="addLock-form">
+            <form @submit.prevent="addLock" class="credentials-form">
                 <input id="name" v-model="name" type="text" required placeholder="Name">
                 <input id="password" v-model="password" type="password" required placeholder="Password">
                 <input id="passwordCorfim" v-model="passwordCorfim" type="password" required
                     placeholder="Confirm Password">
-                <button v-on:click="addLock">Add Lock</button>
+                <button class="form-btn add-lock-btn" v-on:click="addLock">Add Lock</button>
             </form>
         </div>
     </div>
@@ -75,66 +75,24 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 768px) {
-    .add-lock-container{
-        width: 50%;
+
+
+.add-lock-btn {
+  background-color: #ff9505;
+  border: 1px solid #ff9505;
+        width: 80%;
+  
+}
+
+@media screen and (min-width: 450px) {
+    .add-lock-btn{
+        max-width: 300px;
     }
-    
 }
 
-@media screen and (max-width: 768px) {
-    .add-lock-container{
-        width: 85%;
-    }
-    
-}
-.add-lock-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.addLock-form {
-    width: 300px;
-    margin: 0 auto;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-label {
-    margin-bottom: 5px;
-}
-input {
-    width: 100%;
-    height: 40px;
-    padding-left: 20px;
-    display: block;
-    margin-bottom: 30px;
-    margin-right: auto;
-    margin-left: auto;
-    border: 1px solid skyblue;
-}
-
-button {
-    border: 1px solid skyblue;
-    background: skyblue;
-    width: 50%;
-    height: 40px;
-    color: white;
-    cursor: pointer;
-    margin: 5px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 18px;
-}
-
-button:active {
-    opacity: 0.8;
+.add-lock-btn:hover {
+  background-color: #ec4e20;
+  border: 1px solid #ec4e20;
+  color: #fff;
 }
 </style>

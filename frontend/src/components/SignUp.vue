@@ -1,8 +1,9 @@
 <template>
     <div class="form-page-container signup-container">
+        <img alt="UFSC logo" src="../assets/logo.png" class="imagestyle" />
         <div class="form-container">
         <h1 class="signup-title">Sign Up</h1>
-            <form @submit.prevent="signup" class="signup-form">
+            <form @submit.prevent="signup" class="credentials-form">
                 <input id="email" v-model="email" type="email" required placeholder="E-mail">
                 <input id="password" v-model="password" type="password" required placeholder="Password">
                 <input id="password_confirmation" v-model="confirmPassword" type="password" required
@@ -13,7 +14,6 @@
                 </p>
             </form>
         </div>
-        <img alt="UFSC logo" src="../assets/logo.png" class="imagestyle" />
     </div>
 </template>
   
