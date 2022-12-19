@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="form-container edit-form-container">
-            <form action="" class="credentials-form edit-lock-form">
+            <form  class="credentials-form edit-lock-form">
                 <label for="email">E-mail:</label>
                 <input id="email" v-model="email" type="email" required placeholder="E-mail">
                 <label for="start_time">Start Time:</label>
@@ -68,7 +68,7 @@
                 <label for="end_time">End Time:</label>
                 <input id="end_time" v-model="end_time" type="datetime-local" required>
                 <div class="form-btn-container">
-                    <button class="form-btn edit-lock-btn " v-on:click="addNewUser">Add New User</button>
+                    <button class="form-btn edit-lock-btn " v-on:click.prevent="addNewUser">Add New User</button>
                 </div>
             </form>
 
