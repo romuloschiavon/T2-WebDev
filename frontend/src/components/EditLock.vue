@@ -59,9 +59,10 @@
 </template>
 
 <script>
-import TopHeader from './Header.vue'
-import axios from 'axios'
-import api_url from '../config'
+import TopHeader from './Header.vue';
+import axios from 'axios';
+import api_url from '../config';
+import Swal from "sweetalert2";
 
 export default {
     name: 'EditLock',
@@ -89,10 +90,20 @@ export default {
                 data: { oldLockName: localStorage.getItem('lockName'), newLockName: this.name }
             }).then(response => {
                 if (response.status === 200) {
+                    Swal.fire(
+                        'Lock Name Edited!',
+                        'The lock name was edited successfully',
+                        'success'
+                    )
                     console.log("Lock name edited successfully");
                     this.$router.push('/home') // refresh page
                 }
             }).catch(error => {
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                )
                 if (error.response.status === 401) {
                     // Unauthorized, display error message
                     this.errorMessage = 'Invalid credentials'
@@ -122,10 +133,20 @@ export default {
                 data: { lockName: localStorage.getItem('lockName'), lockPassword: this.password }
             }).then(response => {
                 if (response.status === 200) {
+                    Swal.fire(
+                        'Password Edited!',
+                        'The lock password was edited successfully',
+                        'success'
+                    )
                     console.log("Lock password edited successfully");
                     this.$router.push('/home') // redirect to home page
                 }
             }).catch(error => {
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                )
                 if (error.response.status === 401) {
                     // Unauthorized, display error message
                     this.errorMessage = 'Invalid credentials'
@@ -144,10 +165,20 @@ export default {
                 data: { lockName: localStorage.getItem('lockName') }
             }).then(response => {
                 if (response.status === 200) {
+                    Swal.fire(
+                        'Lock Deleted!',
+                        'The lock was deleted successfully',
+                        'success'
+                    )
                     console.log("Lock deleted successfully");
                     this.$router.push('/home') // redirect to home page
                 }
             }).catch(error => {
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                )
                 if (error.response.status === 401) {
                     // Unauthorized, display error message
                     this.errorMessage = 'Invalid credentials'
@@ -175,10 +206,20 @@ export default {
                 }
             }).then(response => {
                 if (response.status === 200) {
+                    Swal.fire(
+                        'User Added!',
+                        'The user was added successfully',
+                        'success'
+                    )
                     console.log("User added successfully");
                     this.$router.push('/home') // redirect to home page
                 }
             }).catch(error => {
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                )
                 if (error.response.status === 401) {
                     // Unauthorized, display error message
                     this.errorMessage = 'Invalid credentials'
@@ -206,10 +247,20 @@ export default {
                 }
             }).then(response => {
                 if (response.status === 200) {
+                    Swal.fire(
+                        'User Deleted!',
+                        'The user was deleted successfully',
+                        'success'
+                    )
                     console.log("User deleted successfully");
                     this.$router.push('/home') // redirect to home page
                 }
             }).catch(error => {
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                )
                 if (error.response.status === 401) {
                     // Unauthorized, display error message
                     this.errorMessage = 'Invalid credentials'
@@ -230,12 +281,7 @@ export default {
         if (!localStorage.getItem('token')) {
             this.$router.push('/login');
         }
-        // let lockInfo = await axios({
-        //     method: 'get',
-        //     url: api_url + '/locks/' + this.$route.params.id,
-        //     headers: { 'Authorization': localStorage.getItem('token') }
-        // });
-
+        
         let result = await axios({
             method: 'get',
             url: api_url + '/usersLocks/getLockUsers',

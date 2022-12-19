@@ -15,9 +15,10 @@
 </template>
 
 <script>
-import TopHeader from './Header.vue'
-import axios from 'axios'
-import api_url from '../config'
+import TopHeader from './Header.vue';
+import axios from 'axios';
+import api_url from '../config';
+import Swal from "sweetalert2";
 
 export default {
     name: 'AddLock',
@@ -51,10 +52,20 @@ export default {
                 data: { name: this.name, password: this.password, confirm_password: this.passwordCorfim }
             }).then(response => {
                 if (response.status === 200) {
+                    Swal.fire(
+                        'Lock added!',
+                        'The lock was added successfully.',
+                        'success'
+                    )
                     console.log("Lock added successfully");
                     this.$router.push('/home') // redirect to home page
                 }
             }).catch(error => {
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                )
                 if (error.response.status === 401) {
                     // Unauthorized, display error message
                     this.errorMessage = 'Invalid credentials'
@@ -76,19 +87,20 @@ export default {
 
 <style scoped>
 @media screen and (min-width: 768px) {
-    .add-lock-container{
+    .add-lock-container {
         width: 50%;
     }
-    
+
 }
 
 @media screen and (max-width: 768px) {
-    .add-lock-container{
+    .add-lock-container {
         width: 85%;
     }
-    
+
 }
-.add-lock-container{
+
+.add-lock-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,6 +121,7 @@ form {
 label {
     margin-bottom: 5px;
 }
+
 input {
     width: 100%;
     height: 40px;
