@@ -88,10 +88,8 @@ export default {
 .signup-btn{
     width: 50%;
     background-color: #4CAF50;
+    border-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
 }
 .signup-title{
@@ -120,7 +118,7 @@ label {
 }
 @media screen and (min-width: 768px) {
     .signup-container{
-        width: 40%;
+        width: 50%;
     }
     .img-logo-ufsc {
         width: 35%;
@@ -129,7 +127,7 @@ label {
 
 @media screen and (max-width: 768px) {
     .signup-container{
-        width: 80%;
+        width: 85%;
     }
     .img-logo-ufsc {
         width: 100%;
@@ -153,16 +151,25 @@ input {
 }
 
 button {
-    height: 40px;
     border: 1px solid skyblue;
     background: skyblue;
+    width: 50%;
+    height: 40px;
     color: white;
     cursor: pointer;
+    margin: 5px;
     text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
 }
 
 button:active {
     opacity: 0.8;
+}
+.login-link{
+    text-align: center;
+    width: 90%;
 }
 </style>
   
