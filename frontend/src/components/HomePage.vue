@@ -266,8 +266,6 @@ button:active {
     background-color: #00548b;
     border: 1px solid #00548b;
     color: #fff;
-    width: 6vw;
-    height: 6vh;
 }
 
 .close-btn {
@@ -283,8 +281,6 @@ button:active {
     background-color: #a02c23;
     border: 1px solid #a02c23;
     color: #fff;
-    width: 6vw;
-    height: 6vh;
 }
 
 .edit-btn {
@@ -300,8 +296,6 @@ button:active {
     background-color: #000;
     border: 1px solid #000;
     color: #fff;
-    width: 6vw;
-    height: 6vh;
 }
 
 @media (max-width: 600px) {
@@ -318,8 +312,6 @@ button:active {
         background-color: #00548b;
         border: 1px solid #00548b;
         color: #fff;
-        width: 25vw;
-        height: 6vh;
     }
 
     .close-btn {
@@ -335,8 +327,6 @@ button:active {
         background-color: #a02c23;
         border: 1px solid #a02c23;
         color: #fff;
-        width: 25vw;
-        height: 6vh;
     }
 
     .edit-btn {
@@ -352,8 +342,6 @@ button:active {
         background-color: #000;
         border: 1px solid #000;
         color: #fff;
-        width: 25vw;
-        height: 6vh;
     }
 }
 </style>
