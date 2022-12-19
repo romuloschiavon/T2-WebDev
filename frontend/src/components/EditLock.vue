@@ -12,18 +12,28 @@
     </div>
     <div class="usersLock-table">
         <table>
-            <tr>
-                <th>UserName</th>
-                <th>AcessTime</th>
-            </tr>
-            <tr v-for="user in usersInfo" :key="user.id">
-                <td>{{ user.email }}</td>
-                <td>{{ user.lockHistory.start_time.toLocaleString("pt-br") }}</td>
-                <td>
-                    <button v-on:click="editUser(user.email)">Edit</button>
-                    <button id="delete" v-on:click="deleteUser(user.email, user.lockHistory.lockName)">Delete</button>
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Access</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="user in usersInfo[Object.keys(usersInfo)[0]]" v-bind:key="user.email">
+                    <td>{{ user.email }}</td>
+                    <td>from</td>
+                    <td>{{ convertToLocale(user.start_time) }}</td>
+                    <td>to</td>
+                    <td>{{ convertToLocale(user.end_time) }}</td>
+                    <td>
+                        <button v-on:click="editUser(user)">Edit</button>
+                    </td>
+                    <td>
+                        <button id="delete" v-on:click="deleteUser(user)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </template>
@@ -72,14 +82,41 @@ export default {
         // editUser(email) {
         //     console.log("editUser");
         // },
-        deleteUser(email, lock) {
-            let resp = {
-                    email: email,
-                    lockName: lock,
-                    start_time: lock.start_time,
-                    end_time: lock.end_time
+        deleteUser(user) {
+            const start = new Date(Date.parse(user.start_time));
+            const end = new Date(Date.parse(user.end_time));
+            const start_time = start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const end_time = end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            axios({
+                method: 'post',
+                url: api_url + '/usersLocks/removeLock',
+                headers: { 'Authorization': localStorage.getItem('token') },
+                data: {
+                    email: user.email,
+                    lockName: localStorage.getItem('lockName'),
+                    start_time: start_time,
+                    end_time: end_time
                 }
-            console.log(resp);
+            }).then(response => {
+                if (response.status === 200) {
+                    console.log("User deleted successfully");
+                    this.$router.push('/home') // redirect to home page
+                }
+            }).catch(error => {
+                if (error.response.status === 401) {
+                    // Unauthorized, display error message
+                    this.errorMessage = 'Invalid credentials'
+                } else {
+                    // Display error message
+                    this.errorMessage = 'Something went wrong'
+                }
+            });
+        },
+        convertToLocale(utcString) {
+            const date = new Date(Date.parse(utcString));
+            const localTimeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            return localTimeString
         }
     },
     async mounted() {
@@ -103,6 +140,7 @@ export default {
             data: {}
         });
         this.usersInfo = result.data;
+        console.log(this.usersInfo)
     }
 }
 </script>

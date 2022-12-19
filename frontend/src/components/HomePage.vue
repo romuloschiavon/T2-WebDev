@@ -4,16 +4,17 @@
     <table>
         <tr>
             <th>Room</th>
-            <th>Time period available</th>
+            <th>Access Time</th>
         </tr>
         <tr v-for="lock in locks" :key="lock.id">
             <td>{{ lock.lockName }}</td>
             <td>
             <table>
                 <tr v-for="time in lock.time_frames" :key="time.id">
-                <td>{{ Date(time.start_time).toLocaleString("pt-br") }}</td>
-                <td>TO</td>
-                <td>{{ Date(time.end_time).toLocaleString("pt-br") }}</td>
+                <td>from</td>
+                <td>{{ convertToLocale(time.start_time) }}</td>
+                <td>to</td>
+                <td>{{ convertToLocale(time.end_time) }}</td>
                 <td>
                     <button id="open" v-on:click="open(lock.lockName)">Open</button>
                 </td>
@@ -106,6 +107,11 @@ export default {
         edit(name) {
             localStorage.setItem('lockName', name)
             this.$router.push('/editlock');
+        },
+        convertToLocale(utcString) {
+            const date = new Date(Date.parse(utcString));
+            const localTimeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            return localTimeString
         }
     },
     async mounted() {
