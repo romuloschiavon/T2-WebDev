@@ -11,7 +11,7 @@
                 <input id="password_confirmation" v-model="confirmPassword" type="password" required placeholder="Confirm Password">
                 <button class="signup-btn" v-on:click="signup">Sign Up</button>
                 <p>
-                    <router-link to="/login">Already have an account? Login</router-link>
+                    <router-link to="/login" scroll-behavior="smooth">Already have an account? Login</router-link>
                 </p>
             </form>
         </div>

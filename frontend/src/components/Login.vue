@@ -46,7 +46,7 @@ export default {
             this.$router.push('/home') // redirect to home page
             //verify if the user is admin
             let decoded = VueJwtDecode.decode(response.data.token);
-            if(decoded.admin){
+            if (decoded.admin) {
               localStorage.setItem('admin', true)
             }
           }
@@ -112,8 +112,9 @@ button {
   margin: 5px;
   text-align: center;
 }
-button:active{
-    opacity: 0.8;
+
+button:active {
+  opacity: 0.8;
 }
 </style>
 
