@@ -47,6 +47,7 @@
 import TopHeader from "./Header.vue";
 import axios from "axios";
 import api_url from "../config";
+import Swal from "sweetalert2";
 
 export default {
     name: "HomePage",
@@ -78,10 +79,20 @@ export default {
                 .then((response) => {
                     if (response.status === 200) {
                         // Lock was successfully opened
+                        Swal.fire(
+                            'Door opened!',
+                            'The door was opened successfully.',
+                            'success'
+                        )
                         console.log("Lock was successfully opened");
                     }
                 })
                 .catch((error) => {
+                    Swal.fire(
+                        'Error!',
+                        'You cannot open the door now or the door is already open.',
+                        'error'
+                    )
                     if (error.response.status === 401) {
                         // Unauthorized, display error message
                         this.errorMessage = "Invalid credentials";
@@ -102,10 +113,20 @@ export default {
                 .then((response) => {
                     if (response.status === 200) {
                         // Lock was successfully closed
+                        Swal.fire(
+                            'Door closed!',
+                            'The door was closed successfully.',
+                            'success'
+                        )
                         console.log("Lock was successfully closed");
                     }
                 })
                 .catch((error) => {
+                    Swal.fire(
+                        'Error!',
+                        'You cannot close the door now or the door is already closed',
+                        'error'
+                    )
                     if (error.response.status === 401) {
                         // Unauthorized, display error message
                         this.errorMessage = "Invalid credentials";
@@ -178,11 +199,11 @@ template {
     width: 100%;
 }
 
-.times{
+.times {
     font-size: 1rem;
 }
 
-.times span{
+.times span {
     font-size: 1rem;
 }
 
