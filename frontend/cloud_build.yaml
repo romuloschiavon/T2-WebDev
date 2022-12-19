@@ -1,0 +1,14 @@
+//cloud-build.yaml
+steps:
+#Create .env file from Google Cloud Build substitution variables
+- name: node
+  entrypoint: npm
+  args: ["run", "create-env"]
+  env:
+    - 'VUE_APP_APP_NAME=${_VUE_APP_APP_NAME}'
+    - 'VUE_APP_BASE_API_URL=${_VUE_APP_BASE_API_URL}'
+    - 'VUE_APP_OTHER_SECRET=${_VUE_APP_OTHER_SECRET}'
+#The .env file is prepared and ready to deploy to Google App Engine
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy"]
+timeout: "1600s"
