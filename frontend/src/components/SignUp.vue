@@ -20,8 +20,9 @@
   
   
 <script>
-import axios from 'axios'
-import api_url from '../config'
+import axios from 'axios';
+import api_url from '../config';
+import Swal from "sweetalert2";
 
 export default {
     name: 'SignUp',
@@ -46,12 +47,22 @@ export default {
             }).then(response => {
                 // handle success
                 if (response.status === 201) {
+                    Swal.fire(
+                        'New user created!',
+                        'You have successfully signed up!',
+                        'success'
+                    )
                     // User was successfully created
                     localStorage.setItem('token', response.data.token)
                     this.$router.push('/home') // redirect to login page
                 }
             }).catch(error => {
                 // handle error
+                Swal.fire(
+                    'Error!',
+                    'Something went wrong.',
+                    'error'
+                )
                 if (error.response.status === 400) {
                     // Bad request, display error message
                     this.errorMessage = 'Invalid input'
@@ -73,8 +84,6 @@ export default {
     }
 }
 </script>
-  
-  
 <style scoped>
 
 
@@ -89,5 +98,3 @@ export default {
     text-decoration: underline;
 }
 </style>
-  
-  
